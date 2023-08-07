@@ -1,0 +1,2 @@
+# ardac-dict
+ARDaC dictionary
