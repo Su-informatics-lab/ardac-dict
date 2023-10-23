@@ -1,0 +1,1 @@
+YAML schema files used to build the ARDaC dictionary.
