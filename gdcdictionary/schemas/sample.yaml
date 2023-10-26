@@ -1,0 +1,209 @@
+$schema: 'http://json-schema.org/draft-04/schema#'
+
+id: 'sample'
+title: Sample
+type: object
+namespace: http://gdc.nci.nih.gov
+category: biospecimen
+program: '*'
+project: '*'
+description: >
+  Any material sample taken from a biological entity for testing, diagnostic, propagation, treatment
+  or research purposes, including a sample obtained from a living organism or taken from the
+  biological object after halting of all its life functions. Biospecimen can contain one or more
+  components including but not limited to cellular molecules, cells, tissues, organs, body fluids,
+  embryos, and body excretory products.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+required:
+  - submitter_id
+  - type
+  - follow_ups
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+links:
+  - name: follow_ups
+    backref: samples
+    label: derived_from
+    target_type: follow_up
+    multiplicity: many_to_one #not sure
+    required: true
+  - name: diagnoses
+    backref: samples
+    label: related_to
+    target_type: diagnosis
+    multiplicity: many_to_one
+    required: false
+
+# Sample properties: keep TCGA-specific fields
+properties:
+  type:
+    type: string
+  id:
+    $ref: '_definitions.yaml#/UUID'
+    systemAlias: node_id
+  state:
+    $ref: '_definitions.yaml#/state'
+  submitter_id:
+    type:
+      - string
+      - 'null'
+    description: >
+      The legacy barcode used before prior to the use UUIDs, varies by project.
+      For TCGA this is bcrsamplebarcode.
+  sample_collection:
+    description: 'Text term to describe if any sample collection was done during the visit'
+    enum:
+      - 'Yes'
+      - 'No'
+  visit_date:
+    $ref: '_definitions.yaml#/datetime'
+  sample_type:
+    term:
+      $ref: '_terms.yaml#/sample_type'
+    enum:
+      - Blood Derived Normal
+      - Blood Derived Normal - Serum
+      - Blood Derived Normal - Whole blood
+      - Blood Derived Normal - Platelet Poor Plasma
+      - Blood Derived Normal - HCl/Neat Plasma
+      - Peripheral Blood Mononuclear Cells
+      - Urine
+      - Saliva
+      - Stool
+      - Anakinra
+  sample_date_time:
+    $ref: '_definitions.yaml#/datetime'
+  days_to_collection:
+    description: 'The number of days from the index date to the date a sample was collected for a specific study or project'
+    type: integer
+  sample_fast:
+    description: 'Text term to describe if the patient fasted before sample collection'
+    enum:
+      - 'Yes'
+      - 'No'
+  sample_fast_hours:
+    description: 'Number representing the total hours fasted before collecting the sample'
+    type: integer
+  sample_number_of_tubes:
+    description: 'Number representing the number of tubes collected'
+    type: integer
+  total_cell_count:
+    description: 'Number representing the total cell count in the sample (in million)'
+    type: integer
+  sample_home_collection_kit:
+    description: 'Text term to describe if the sample was collected using a home collection kit'
+    enum:
+      - 'Yes'
+      - 'No'
+  preservation_method:
+    description: 'Text term that represents the method used to preserve the sample'
+    enum:
+      - Frozen
+      - Unknown
+      - Not Reported
+  time_between_collection_and_freezing:
+    description: 'Numeric representation of the elapsed time between the sample collection and freezing, measured in minutes'
+    type: integer
+  sample_transportation_method_ice:
+    description: 'Text term that describes if the sample was transported to study site on ice'
+    enum:
+      - 'Yes'
+      - 'No'
+  days_to_receive_sample:
+    description: 'The number of days from the index date to the date a sample was received by the site'
+    type: integer
+  sample_exception:
+    description: 'Text term represents exceptions during sample collection'
+    enum:
+      - 'Yes'
+      - 'No'
+  sample_exception_clotted:
+    description: 'Text term that represents if the sample exception was applied due to clotting'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+  sample_exception_contaminated:
+    description: 'Text term that represents if the sample exception was applied due to contamination'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+  sample_exception_damaged:
+    description: 'Text term that represents if the sample exception was applied due to damage'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+  sample_exception_hemolyzed:
+    desciption: 'Text term that represents if the sample exception was applied due to hemolysis'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+  sample_exception_hemorrhagic:
+    description: 'Text term that represents if the sample exception was applied due to hemorrhage'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+  sample_exception_late_processing_8H:
+    description: 'Text term that represents if the sample exception was applied due to late processing by 8 hours'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+  sample_exception_late_processing_24H:
+    description: 'Text term that represents if the sample exception was applied due to late processing by 24 hours'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+  sample_exception_lipemic:
+    description: 'Text term that represents if the sample exception was applied due to lipemia'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+  sample_exception_necrotic:
+    description: 'Text term that represents if the sample exception was applied due to necrosis'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+  sample_exception_insufficient_quantity:
+    description: 'Text term that represents if the sample exception was applied due to insufficient quantity'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+  sample_exception_thawed:
+    description: 'Text term that represents if the sample exception was applied due to thawing'
+    enum:
+      - 'Yes'
+      - 'No'
+      - 'N/A'
+
+  follow_ups:
+    $ref: '_definitions.yaml#/to_one'
+  diagnoses:
+    $ref: '_definitions.yaml#/to_one'
+  project_id:
+    type: string
+  created_datetime:
+    $ref: '_definitions.yaml#/datetime'
+  updated_datetime:
+    $ref: '_definitions.yaml#/datetime'
