@@ -1,81 +1,72 @@
-$schema: "http://json-schema.org/draft-04/schema#"
-
-id: "study"
-title: Study
-type: object
-namespace: http://gdc.nci.nih.gov
+$schema: http://json-schema.org/draft-04/schema#
+additionalProperties: false
 category: administrative
+description: "The study node. \n"
+id: study
+links:
+- backref: studies
+  label: member_of
+  multiplicity: many_to_one
+  name: projects
+  required: true
+  target_type: project
+namespace: http://gdc.nci.nih.gov
 program: '*'
 project: '*'
-description: >
-  The study node. 
-additionalProperties: false
-submittable: true
-validators: null
-
-systemProperties:
-  - id
-  - project_id
-  - state
-  - created_datetime
-  - updated_datetime
-
-
-#Original
-links:
- - name: projects
-   backref: studies
-   label: member_of
-   target_type: project
-   multiplicity: many_to_one
-   required: true
-
-required:
-  - submitter_id
-  - type
-  - projects
-  - study_name
-
-uniqueKeys:
-  - [id]
-  - [project_id, submitter_id]
-
-# Case properties
 properties:
-  type:
-    type: string
-  id:
-    $ref: "_definitions.yaml#/UUID"
-    systemAlias: node_id
-  state:
-    $ref: "_definitions.yaml#/state"
-  submitter_id:
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  data_description:
+    description: Brief description of the data being provided for this study. Free
+      text.
     type:
-      - string
-      - "null"
+    - string
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  projects:
+    $ref: _definitions.yaml#/to_one_project
+  state:
+    $ref: _definitions.yaml#/state
+  study_description:
+    description: A brief description of the study being performed. Free text.
+    type:
+    - string
   study_name:
     type:
-      - string
-  data_description:
-    description: "Brief description of the data being provided for this study. Free text."
+    - string
+  submitter_id:
     type:
-      - string
-  study_description:
-    description: "A brief description of the study being performed. Free text."
-    type:
-      - string
+    - string
+    - 'null'
+  type:
+    type: string
   type_of_data:
-    description: "Is the data raw or processed?"
+    description: Is the data raw or processed?
     enum:
-      - Raw
-      - Processed
-      - Raw/ Processed
-
-  projects:
-    $ref: "_definitions.yaml#/to_one_project"
-  project_id:
-    $ref: "_definitions.yaml#/project_id"
-  created_datetime:
-    $ref: "_definitions.yaml#/datetime"
+    - Raw
+    - Processed
+    - Raw/ Processed
   updated_datetime:
-    $ref: "_definitions.yaml#/datetime"
+    $ref: _definitions.yaml#/datetime
+required:
+- submitter_id
+- type
+- projects
+- study_name
+submittable: true
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+title: Study
+type: object
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+validators: null
