@@ -43,7 +43,7 @@ properties:
     - Unknown
   cause_of_death_secondary:
     description: Text term to identify the secondary cause of death for a patient.
-    emum:
+    enum:
     - Cardiovascular Disorder
     - NOS
     - End-stage Renal Disease
@@ -70,8 +70,8 @@ properties:
     type:
     - number
   death_related_to:
-    description: Text term to identify common condittions to which the death is related.
-    emum:
+    description: Text term to identify common conditions to which the death is related.
+    enum:
     - Spontaneous Bacterial Peritonitis
     - Sepsis
     - Esophageal Variceal Bleed
