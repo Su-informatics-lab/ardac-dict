@@ -3,7 +3,7 @@ This repository contains the data model for the [Alcohol Research Data Commons (
 
 For general information about dictionaries in Gen3, see the [Gen3 Data Dictionaries](https://gen3.org/resources/user/dictionary/) documentation.
 
-Deployable versions of the ARDaC data dictionary are available at https://dictionary.ardac.org, e.g.: https://dictionary.ardac.org/v1.0.0/schema.json.
+Deployable versions of the ARDaC data dictionary are available at https://dictionary.ardac.org, e.g.: https://dictionary.ardac.org/1.0.0/schema.json.
 
 To recreate a version of the dictionary, check out the appropriate tag and use the Gen3 [dictionaryutils](https://github.com/uc-cdis/dictionaryutils) to create a JSON file that can be deployed in Gen3.
 
