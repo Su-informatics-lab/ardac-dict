@@ -1,0 +1,75 @@
+$schema: http://json-schema.org/draft-04/schema#
+additionalProperties: false
+category: index_file
+description: Data file containing the index for a set of aligned reads.
+id: aligned_reads_index
+links:
+- exclusive: false
+  required: true
+  subgroup:
+  - backref: aligned_reads_indexes
+    label: derived_from
+    multiplicity: one_to_one
+    name: submitted_aligned_reads_files
+    required: false
+    target_type: submitted_aligned_reads
+  - backref: aligned_reads_indexes
+    label: data_from
+    multiplicity: many_to_many
+    name: core_metadata_collections
+    required: false
+    target_type: core_metadata_collection
+namespace: http://gdc.nci.nih.gov
+program: '*'
+project: '*'
+properties:
+  $ref: _definitions.yaml#/data_file_properties
+  core_metadata_collections:
+    $ref: _definitions.yaml#/to_many
+  data_category:
+    enum:
+    - Sequencing Data
+    - Sequencing Reads
+    - Raw Sequencing Data
+    term:
+      $ref: _terms.yaml#/data_category
+  data_format:
+    enum:
+    - BAI
+    term:
+      $ref: _terms.yaml#/data_format
+  data_type:
+    enum:
+    - Aligned Reads Index
+    term:
+      $ref: _terms.yaml#/data_type
+  submitted_aligned_reads_files:
+    $ref: _definitions.yaml#/to_one
+  type:
+    enum:
+    - aligned_reads_index
+required:
+- submitter_id
+- type
+- file_name
+- file_size
+- md5sum
+- data_category
+- data_type
+- data_format
+submittable: true
+systemProperties:
+- id
+- project_id
+- created_datetime
+- updated_datetime
+- state
+- file_state
+- error_type
+title: Aligned Reads Index
+type: object
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+validators: null

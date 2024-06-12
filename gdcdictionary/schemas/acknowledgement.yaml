@@ -1,0 +1,57 @@
+$schema: http://json-schema.org/draft-04/schema#
+additionalProperties: false
+category: administrative
+description: Acknowledgement of an individual involved in a project.
+id: acknowledgement
+links:
+- backref: acknowledgements
+  label: contribute_to
+  multiplicity: many_to_many
+  name: projects
+  required: true
+  target_type: project
+namespace: http://gdc.nci.nih.gov
+program: '*'
+project: '*'
+properties:
+  acknowledgee:
+    description: The indvidiual or group being acknowledged by the project.
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  project_id:
+    type: string
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  type:
+    enum:
+    - acknowledgement
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+required:
+- submitter_id
+- type
+- projects
+submittable: true
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+title: Acknowledgement
+type: object
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+validators: null

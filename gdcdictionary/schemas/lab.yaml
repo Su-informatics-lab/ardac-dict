@@ -1,0 +1,135 @@
+$schema: http://json-schema.org/draft-04/schema#
+additionalProperties: false
+category: administrative
+description: 'ARDaC: Lab node describes different lab centers, which are different
+  data sources.
+
+  '
+id: lab
+links:
+- backref: labs
+  label: member_of
+  multiplicity: many_to_one
+  name: projects
+  required: true
+  target_type: project
+namespace: http://gdc.nci.nih.gov
+program: '*'
+project: '*'
+properties:
+  PI_email:
+    description: PI' email.
+    type:
+    - string
+    - 'null'
+  PI_name:
+    description: "PI\u2019s name."
+    type:
+    - string
+    - 'null'
+  address:
+    description: Address.
+    type:
+    - string
+    - 'null'
+  center_type:
+    description: Type classification of the lab (e.g. CGCC).
+    type:
+    - string
+    - 'null'
+  code:
+    description: Numeric code for the lab.
+    type:
+    - string
+    - 'null'
+  contact_email:
+    description: "Contact\u2019s email."
+    type:
+    - string
+    - 'null'
+  contact_name:
+    description: "Contact\u2019s name."
+    type:
+    - string
+    - 'null'
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  description_of_lab:
+    description: Description of the lab.
+    type:
+    - string
+    - 'null'
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  keyword_name:
+    description: The name of the keyword.
+    type: string
+  name:
+    description: Name of the lab (e.g. IU).
+    type:
+    - string
+    - 'null'
+  name_of_institute:
+    description: Name of institute.
+    type:
+    - string
+    - 'null'
+  namespace:
+    description: Domain name of the lab (e.g. iu.edu).
+    type:
+    - string
+    - 'null'
+  note:
+    description: Note.
+    type:
+    - string
+    - 'null'
+  project_id:
+    type: string
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  short_name:
+    description: Shortened name of the lab (e.g. ARDaC).
+    type:
+    - string
+    - 'null'
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  translational_projects_title:
+    description: Title of the translational projects.
+    type:
+    - string
+    - 'null'
+  type:
+    type: string
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  url_of_lab_website:
+    description: "URL to the lab\u2019s website."
+    type:
+    - string
+    - 'null'
+required:
+- submitter_id
+- type
+- projects
+- name_of_institute
+submittable: true
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+title: Lab
+type: object
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+validators: null

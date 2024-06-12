@@ -1,0 +1,113 @@
+$schema: http://json-schema.org/draft-04/schema#
+additionalProperties: false
+category: clinical
+description: 'Clinically relevant patient information not immediately resulting from
+  genetic predispositions.
+
+  '
+id: exposure
+links:
+- backref: exposures
+  label: describes
+  multiplicity: many_to_one
+  name: cases
+  required: true
+  target_type: case
+namespace: http://gdc.nci.nih.gov
+preferred:
+- cigarettes_per_day
+- years_smoked
+program: '*'
+project: '*'
+properties:
+  alcohol_history:
+    term:
+      $ref: _terms.yaml#/alcohol_history
+    type: string
+  alcohol_intensity:
+    term:
+      $ref: _terms.yaml#/alcohol_intensity
+    type: string
+  bmi:
+    term:
+      $ref: _terms.yaml#/bmi
+    type: number
+  cases:
+    $ref: _definitions.yaml#/to_one
+  cigarettes_per_day:
+    term:
+      $ref: _terms.yaml#/cigarettes_per_day
+    type: number
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  height:
+    term:
+      $ref: _terms.yaml#/height
+    type: number
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  pack_years_smoked:
+    term:
+      $ref: _terms.yaml#/pack_years_smoked
+    type: number
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  tobacco_smoking_onset_year:
+    term:
+      $ref: _terms.yaml#/tobacco_smoking_onset_year
+    type: integer
+  tobacco_smoking_quit_year:
+    term:
+      $ref: _terms.yaml#/tobacco_smoking_quit_year
+    type: integer
+  tobacco_smoking_status:
+    enum:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '6'
+    - '7'
+    - Unknown
+    - Not Reported
+    - Not Allowed To Collect
+    term:
+      $ref: _terms.yaml#/tobacco_smoking_status
+  type:
+    enum:
+    - exposure
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  weight:
+    term:
+      $ref: _terms.yaml#/weight
+    type: number
+  years_smoked:
+    term:
+      $ref: _terms.yaml#/years_smoked
+    type: number
+required:
+- submitter_id
+- type
+submittable: true
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+title: Exposure
+type: object
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+validators: null
