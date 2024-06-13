@@ -1,12 +1,11 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: acknowledgement
-title: Acknowledgement
+id: nanxin_test_node
+title: Nanxin_test
 type: object
-namespace: http://gdc.nci.nih.gov
 category: administrative
 program: '*'
 project: '*'
-description: Acknowledgement of an individual involved in a project.
+description: nanxin_test_node for a project.
 additionalProperties: false
 submittable: true
 validators: null
@@ -16,13 +15,6 @@ systemProperties:
 - state
 - created_datetime
 - updated_datetime
-links:
-- name: projects
-  backref: acknowledgements
-  label: contribute_to
-  target_type: project
-  multiplicity: many_to_many
-  required: true
 required:
 - submitter_id
 - type
@@ -31,10 +23,17 @@ uniqueKeys:
 - - id
 - - project_id
   - submitter_id
+links:
+- name: projects
+  backref: nanxin_test_nodes
+  label: describe
+  target_type: project
+  multiplicity: many_to_many
+  required: true
+constraints: null
 properties:
   type:
-    enum:
-    - acknowledgement
+    type: string
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
@@ -44,9 +43,9 @@ properties:
     type:
     - string
     - 'null'
-  acknowledgee:
-    description: The indvidiual or group being acknowledged by the project.
+  keyword_name:
     type: string
+    description: The name of the keyword.
   projects:
     $ref: _definitions.yaml#/to_many_project
   project_id:

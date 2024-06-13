@@ -1,20 +1,38 @@
 $schema: http://json-schema.org/draft-04/schema#
-additionalProperties: false
+id: core_metadata_collection
+title: Core Metadata Collection
+type: object
+namespace: https://dcp.bionimbus.org/
 category: administrative
+program: '*'
+project: '*'
 description: 'Structured description of a collection of several dataset
 
   '
-id: core_metadata_collection
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
 links:
-- backref: core_metadata_collections
+- name: projects
+  backref: core_metadata_collections
   label: data_from
-  multiplicity: many_to_one
-  name: projects
-  required: true
   target_type: project
-namespace: https://dcp.bionimbus.org/
-program: '*'
-project: '*'
+  multiplicity: many_to_one
+  required: true
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+required:
+- submitter_id
+- type
+- projects
 properties:
   $ref: _definitions.yaml#/ubiquitous_properties
   contributor:
@@ -44,14 +62,6 @@ properties:
 
       '
     type: string
-  data_type:
-    description: 'The nature or genre of the resource. Recommended best practice is
-      to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE].
-      To describe the file format, physical medium, or dimensions of the resource,
-      use the Format element.
-
-      '
-    type: string
   date:
     $ref: _definitions.yaml#/datetime
   description:
@@ -73,8 +83,6 @@ properties:
 
       '
     type: string
-  projects:
-    $ref: _definitions.yaml#/to_one_project
   publisher:
     description: 'An entity responsible for making the resource available. Examples
       of a Publisher include a person, an organization, or a service. Typically, the
@@ -115,21 +123,13 @@ properties:
 
       '
     type: string
-required:
-- submitter_id
-- type
-- projects
-submittable: true
-systemProperties:
-- id
-- project_id
-- state
-- created_datetime
-- updated_datetime
-title: Core Metadata Collection
-type: object
-uniqueKeys:
-- - id
-- - project_id
-  - submitter_id
-validators: null
+  data_type:
+    description: 'The nature or genre of the resource. Recommended best practice is
+      to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE].
+      To describe the file format, physical medium, or dimensions of the resource,
+      use the Format element.
+
+      '
+    type: string
+  projects:
+    $ref: _definitions.yaml#/to_one_project

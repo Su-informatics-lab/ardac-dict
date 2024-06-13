@@ -1,27 +1,58 @@
 $schema: http://json-schema.org/draft-04/schema#
-additionalProperties: false
+id: aliquot
+title: Aliquot
+type: object
 category: biospecimen
+program: '*'
+project: '*'
 description: 'Pertaining to a portion of the whole; any one of two or more samples
   of something, of the same volume or weight.
 
   '
-id: aliquot
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
 links:
-- backref: aliquots
+- name: follow_ups
+  backref: aliquots
   label: describes
-  multiplicity: many_to_one
-  name: follow_ups
-  required: true
   target_type: follow_up
-- backref: aliquots
-  label: describe
   multiplicity: many_to_one
-  name: labs
-  required: false
+  required: true
+- name: labs
+  backref: aliquots
+  label: describe
   target_type: lab
-program: '*'
-project: '*'
+  multiplicity: many_to_one
+  required: false
+required:
+- submitter_id
+- type
+- follow_ups
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
 properties:
+  type:
+    type: string
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+    description: The legacy barcode used before prior to the use UUIDs. For TCGA this
+      is bcraliquotbarcode.
   aliquot_amount:
     description: Aliquot quantity, (weight in grams or volume in ml and other units).
     type:
@@ -32,27 +63,6 @@ properties:
     - gram
     - ml
     - Collection Kit
-  container_type:
-    description: Term to describe type of container in which Aliquot was collected.
-    enum:
-    - 2 ml microtubes
-    - 1.5 ml Fisherbrand Sterile Microcentrifuge Tubes with Screw Caps
-    - 1.8 ml cryovials
-    - 5 ml cryovials
-    - 15 ml cryovials
-    - Collection Cups
-    - Collection Kit
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  follow_ups:
-    $ref: _definitions.yaml#/to_one
-  id:
-    $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
-  labs:
-    $ref: _definitions.yaml#/to_one
-  project_id:
-    $ref: _definitions.yaml#/project_id
   specimen_type:
     description: Term to describe type of sample collection.
     enum:
@@ -73,33 +83,23 @@ properties:
     - Whole Blood (DNA)
     - Unknown Code
     - Liver Tissue
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    description: The legacy barcode used before prior to the use UUIDs. For TCGA this
-      is bcraliquotbarcode.
-    type:
-    - string
-    - 'null'
-  type:
-    type: string
+  container_type:
+    description: Term to describe type of container in which Aliquot was collected.
+    enum:
+    - 2 ml microtubes
+    - 1.5 ml Fisherbrand Sterile Microcentrifuge Tubes with Screw Caps
+    - 1.8 ml cryovials
+    - 5 ml cryovials
+    - 15 ml cryovials
+    - Collection Cups
+    - Collection Kit
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  labs:
+    $ref: _definitions.yaml#/to_one
+  follow_ups:
+    $ref: _definitions.yaml#/to_one
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-required:
-- submitter_id
-- type
-- follow_ups
-submittable: true
-systemProperties:
-- id
-- project_id
-- state
-- created_datetime
-- updated_datetime
-title: Aliquot
-type: object
-uniqueKeys:
-- - id
-- - project_id
-  - submitter_id
-validators: null

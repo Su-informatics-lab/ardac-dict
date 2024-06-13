@@ -1,84 +1,84 @@
 $schema: http://json-schema.org/draft-04/schema#
-additionalProperties: false
+id: family_history
+title: Family History
+type: object
+namespace: http://gdc.nci.nih.gov
 category: clinical
+program: '*'
+project: '*'
 description: 'Record of a patient''s background regarding cancer events of blood relatives.
 
   '
-id: family_history
-links:
-- backref: family_histories
-  label: describes
-  multiplicity: many_to_one
-  name: cases
-  required: true
-  target_type: case
-namespace: http://gdc.nci.nih.gov
-program: '*'
-project: '*'
-properties:
-  cases:
-    $ref: _definitions.yaml#/to_one
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  id:
-    $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
-  project_id:
-    $ref: _definitions.yaml#/project_id
-  relationship_age_at_diagnosis:
-    term:
-      $ref: _terms.yaml#/relationship_age_at_diagnosis
-    type: number
-  relationship_gender:
-    enum:
-    - female
-    - male
-    - unknown
-    - unspecified
-    - not reported
-    term:
-      $ref: _terms.yaml#/gender
-  relationship_primary_diagnosis:
-    term:
-      $ref: _terms.yaml#/primary_diagnosis
-    type: string
-  relationship_type:
-    term:
-      $ref: _terms.yaml#/relationship_type
-    type: string
-  relative_with_cancer_history:
-    enum:
-    - 'yes'
-    - 'no'
-    - unknown
-    - not reported
-    term:
-      $ref: _terms.yaml#/relative_with_cancer_history
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    type:
-    - string
-    - 'null'
-  type:
-    enum:
-    - family_history
-  updated_datetime:
-    $ref: _definitions.yaml#/datetime
-required:
-- submitter_id
-- type
+additionalProperties: false
 submittable: true
+validators: null
 systemProperties:
 - id
 - project_id
 - state
 - created_datetime
 - updated_datetime
-title: Family History
-type: object
+required:
+- submitter_id
+- type
+links:
+- name: cases
+  backref: family_histories
+  label: describes
+  target_type: case
+  multiplicity: many_to_one
+  required: true
 uniqueKeys:
 - - id
 - - project_id
   - submitter_id
-validators: null
+properties:
+  type:
+    enum:
+    - family_history
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  relative_with_cancer_history:
+    term:
+      $ref: _terms.yaml#/relative_with_cancer_history
+    enum:
+    - 'yes'
+    - 'no'
+    - unknown
+    - not reported
+  relationship_type:
+    term:
+      $ref: _terms.yaml#/relationship_type
+    type: string
+  relationship_gender:
+    term:
+      $ref: _terms.yaml#/gender
+    enum:
+    - female
+    - male
+    - unknown
+    - unspecified
+    - not reported
+  relationship_age_at_diagnosis:
+    term:
+      $ref: _terms.yaml#/relationship_age_at_diagnosis
+    type: number
+  relationship_primary_diagnosis:
+    term:
+      $ref: _terms.yaml#/primary_diagnosis
+    type: string
+  cases:
+    $ref: _definitions.yaml#/to_one
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime

@@ -1,24 +1,51 @@
 $schema: http://json-schema.org/draft-04/schema#
-additionalProperties: false
+id: treatment
+title: Treatment
+type: object
+namespace: http://gdc.nci.nih.gov
 category: clinical
+program: '*'
+project: '*'
 description: 'Record of the administration and intention of therapeutic agents provided
   to a patient to alter the course of a pathologic process.
 
   '
-id: treatment
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+required:
+- submitter_id
+- type
 links:
-- backref: treatments
+- name: diagnoses
+  backref: treatments
   label: describes
-  multiplicity: many_to_one
-  name: diagnoses
-  required: true
   target_type: diagnosis
-namespace: http://gdc.nci.nih.gov
-program: '*'
-project: '*'
+  multiplicity: many_to_one
+  required: true
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
 properties:
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
+  type:
+    enum:
+    - treatment
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
   days_to_treatment:
     term:
       $ref: _terms.yaml#/days_to_treatment
@@ -31,24 +58,13 @@ properties:
     term:
       $ref: _terms.yaml#/days_to_treatment_start
     type: number
-  diagnoses:
-    $ref: _definitions.yaml#/to_one
-  id:
-    $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
-  project_id:
-    $ref: _definitions.yaml#/project_id
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    type:
-    - string
-    - 'null'
   therapeutic_agents:
     term:
       $ref: _terms.yaml#/therapeutic_agents
     type: string
   treatment_anatomic_site:
+    term:
+      $ref: _terms.yaml#/treatment_anatomic_site
     enum:
     - Abdomen, total
     - Arm
@@ -127,30 +143,30 @@ properties:
     - Unknown
     - Not Reported
     - Not Allowed To Collect
-    term:
-      $ref: _terms.yaml#/treatment_anatomic_site
   treatment_intent_type:
     term:
       $ref: _terms.yaml#/treatment_intent_type
     type: string
   treatment_or_therapy:
+    term:
+      $ref: _terms.yaml#/treatment_or_therapy
     enum:
     - 'yes'
     - 'no'
     - unknown
     - not reported
-    term:
-      $ref: _terms.yaml#/treatment_or_therapy
   treatment_outcome:
+    term:
+      $ref: _terms.yaml#/treatment_outcome
     enum:
     - Complete Response
     - Partial Response
     - Treatment Ongoing
     - Treatment Stopped Due to Toxicity
     - Unknown
-    term:
-      $ref: _terms.yaml#/treatment_outcome
   treatment_type:
+    term:
+      $ref: _terms.yaml#/treatment_type
     enum:
     - Ablation
     - Chemotherapy
@@ -169,27 +185,11 @@ properties:
     - Unknown
     - Not Reported
     - Not Allowed To Collect
-    term:
-      $ref: _terms.yaml#/treatment_type
-  type:
-    enum:
-    - treatment
+  diagnoses:
+    $ref: _definitions.yaml#/to_one
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-required:
-- submitter_id
-- type
-submittable: true
-systemProperties:
-- id
-- project_id
-- state
-- created_datetime
-- updated_datetime
-title: Treatment
-type: object
-uniqueKeys:
-- - id
-- - project_id
-  - submitter_id
-validators: null

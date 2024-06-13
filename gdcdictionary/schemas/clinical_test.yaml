@@ -1,31 +1,66 @@
 $schema: http://json-schema.org/draft-04/schema#
-additionalProperties: false
+id: clinical_test
+title: Clinical Test
+type: object
+namespace: http://gdc.nci.nih.gov
 category: clinical
+project: '*'
+program: '*'
 description: "Metadata concerning any clinical tests used in relation to a case diagnosis.\
   \ \n"
-id: clinical_test
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- created_datetime
+- updated_datetime
+- state
 links:
-- backref: clinical_tests
+- name: cases
+  backref: clinical_tests
   label: performed_for
-  multiplicity: many_to_one
-  name: cases
-  required: true
   target_type: case
-- backref: clinical_tests
+  multiplicity: many_to_one
+  required: true
+- name: diagnoses
+  backref: clinical_tests
   label: relates_to
-  multiplicity: many_to_many
-  name: diagnoses
-  required: false
   target_type: diagnosis
-namespace: http://gdc.nci.nih.gov
-program: '*'
-project: '*'
+  multiplicity: many_to_many
+  required: false
+required:
+- submitter_id
+- type
+- biomarker_name
+- biomarker_result
+- biomarker_test_method
+- cases
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
 properties:
+  type:
+    enum:
+    - clinical_test
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
   biomarker_name:
     term:
       $ref: _terms.yaml#/biomarker_name
     type: string
   biomarker_result:
+    term:
+      $ref: _terms.yaml#/biomarker_result
     enum:
     - Amplification
     - Gain
@@ -36,9 +71,9 @@ properties:
     - Not Reported
     - Not Allowed To Collect
     - Pending
-    term:
-      $ref: _terms.yaml#/biomarker_result
   biomarker_test_method:
+    term:
+      $ref: _terms.yaml#/biomarker_test_method
     enum:
     - Cytogenetics
     - FISH
@@ -52,23 +87,17 @@ properties:
     - Not Reported
     - Not Allowed To Collect
     - Pending
-    term:
-      $ref: _terms.yaml#/biomarker_test_method
-  cases:
-    $ref: _definitions.yaml#/to_one
   cea_level_preoperative:
     term:
       $ref: _terms.yaml#/cea_level_preoperative
     type: number
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  diagnoses:
-    $ref: _definitions.yaml#/to_many
   dlco_ref_predictive_percent:
     term:
       $ref: _terms.yaml#/dlco_ref_predictive_percent
     type: number
   estrogen_receptor_percent_positive_ihc:
+    term:
+      $ref: _terms.yaml#/estrogen_receptor_percent_positive_ihc
     enum:
     - <1%
     - 1-10%
@@ -81,24 +110,14 @@ properties:
     - 71-80%
     - 81-90%
     - 91-100%
-    term:
-      $ref: _terms.yaml#/estrogen_receptor_percent_positive_ihc
   estrogen_receptor_result_ihc:
+    term:
+      $ref: _terms.yaml#/estrogen_receptor_result_ihc
     enum:
     - Negative
     - Not Performed
     - Positive
     - Unknown
-    term:
-      $ref: _terms.yaml#/estrogen_receptor_result_ihc
-  fev1_fvc_post_bronch_percent:
-    term:
-      $ref: _terms.yaml#/fev1_fvc_post_bronch_percent
-    type: number
-  fev1_fvc_pre_bronch_percent:
-    term:
-      $ref: _terms.yaml#/fev1_fvc_pre_bronch_percent
-    type: number
   fev1_ref_post_bronch_percent:
     term:
       $ref: _terms.yaml#/fev1_ref_post_bronch_percent
@@ -107,7 +126,17 @@ properties:
     term:
       $ref: _terms.yaml#/fev1_ref_pre_bronch_percent
     type: number
+  fev1_fvc_post_bronch_percent:
+    term:
+      $ref: _terms.yaml#/fev1_fvc_post_bronch_percent
+    type: number
+  fev1_fvc_pre_bronch_percent:
+    term:
+      $ref: _terms.yaml#/fev1_fvc_pre_bronch_percent
+    type: number
   her2_erbb2_percent_positive_ihc:
+    term:
+      $ref: _terms.yaml#/her2_erbb2_percent_positive_ihc
     enum:
     - <1%
     - 1-10%
@@ -120,27 +149,22 @@ properties:
     - 71-80%
     - 81-90%
     - 91-100%
-    term:
-      $ref: _terms.yaml#/her2_erbb2_percent_positive_ihc
   her2_erbb2_result_fish:
-    enum:
-    - Negative
-    - Not Performed
-    - Positive
-    - Unknown
     term:
       $ref: _terms.yaml#/her2_erbb2_result_fish
-  her2_erbb2_result_ihc:
     enum:
     - Negative
     - Not Performed
     - Positive
     - Unknown
+  her2_erbb2_result_ihc:
     term:
       $ref: _terms.yaml#/her2_erbb2_result_ihc
-  id:
-    $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
+    enum:
+    - Negative
+    - Not Performed
+    - Positive
+    - Unknown
   ldh_level_at_diagnosis:
     term:
       $ref: _terms.yaml#/ldh_level_at_diagnosis
@@ -150,13 +174,15 @@ properties:
       $ref: _terms.yaml#/ldh_normal_range_upper
     type: number
   microsatellite_instability_abnormal:
+    term:
+      $ref: _terms.yaml#/microsatellite_instability_abnormal
     enum:
     - 'Yes'
     - 'No'
     - Unknown
-    term:
-      $ref: _terms.yaml#/microsatellite_instability_abnormal
   progesterone_receptor_percent_positive_ihc:
+    term:
+      $ref: _terms.yaml#/progesterone_receptor_percent_positive_ihc
     enum:
     - <1%
     - 1-10%
@@ -169,47 +195,21 @@ properties:
     - 71-80%
     - 81-90%
     - 91-100%
-    term:
-      $ref: _terms.yaml#/progesterone_receptor_percent_positive_ihc
   progesterone_receptor_result_ihc:
+    term:
+      $ref: _terms.yaml#/progesterone_receptor_result_ihc
     enum:
     - Negative
     - Not Performed
     - Positive
     - Unknown
-    term:
-      $ref: _terms.yaml#/progesterone_receptor_result_ihc
+  cases:
+    $ref: _definitions.yaml#/to_one
+  diagnoses:
+    $ref: _definitions.yaml#/to_many
   project_id:
     $ref: _definitions.yaml#/project_id
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    type:
-    - string
-    - 'null'
-  type:
-    enum:
-    - clinical_test
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-required:
-- submitter_id
-- type
-- biomarker_name
-- biomarker_result
-- biomarker_test_method
-- cases
-submittable: true
-systemProperties:
-- id
-- project_id
-- created_datetime
-- updated_datetime
-- state
-title: Clinical Test
-type: object
-uniqueKeys:
-- - id
-- - project_id
-  - submitter_id
-validators: null

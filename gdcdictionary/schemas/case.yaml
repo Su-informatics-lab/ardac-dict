@@ -1,60 +1,49 @@
 $schema: http://json-schema.org/draft-04/schema#
-additionalProperties: false
-category: administrative
-description: "The collection of all data related to a specific subject in the context\
-  \ of a specific experiment. \n"
 id: case
-links:
-- backref: cases
-  label: member_of
-  multiplicity: many_to_one
-  name: studies
-  required: true
-  target_type: study
+title: Case
+type: object
 namespace: http://gdc.nci.nih.gov
+category: administrative
 program: '*'
 project: '*'
+description: "The collection of all data related to a specific subject in the context\
+  \ of a specific experiment. \n"
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- created_datetime
+- updated_datetime
+- state
+links:
+- name: studies
+  backref: cases
+  label: member_of
+  target_type: study
+  multiplicity: many_to_one
+  required: true
+required:
+- submitter_id
+- type
+- studies
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
 properties:
-  actarm:
-    description: "Description of actual Arm. When an Arm is not planned, ACTARM will\
-      \ be \u201CUnplanned Treatment\u201D. Randomized subjects who were not treated\
-      \ will be given a value of \u201CNot Treated\u201D. Values should be \u201C\
-      Screen Failure\u201D for screen failures and \u201CNot Assigned\u201D for subjects\
-      \ not assigned to treatment. Restricted to values in Trial Arms in all other\
-      \ cases."
-    enum:
-    - Prednisone
-    - Anakinra + Zinc
-    - Not Treated
-  ah_hosp:
-    description: Boolean variable that describes in the last year, were you hospitalized
-      due to Alcoholic Hepatitis?
-    enum:
-    - 'Yes'
-    - 'No'
-  ah_hosp_num:
-    description: Numeric term used to desceibe how many times that patient was hospitalized
-      for alcoholic hepatitis?
+  type:
+    type: string
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
     type:
-    - number
-  aki_status:
-    description: Aki status of the patient.
-    enum:
-    - 'Yes'
-    - 'No'
-    - Unknown
-  bari_surgery:
-    description: Boolean variable that describes whether the patient ever had any
-      type of Bariatric Surgery?
-    enum:
-    - 'Yes'
-    - 'No'
-  cohort:
-    description: The text term used to describe the study arm of the patient.
-    enum:
-    - Heavy Drinker with Alcoholic Hepatits
-    - Heavy Drinker without Alcoholic Hepatits
-    - Healthy Donor
+    - string
+    - 'null'
   consent_type:
     description: The text term used to describe the type of consent obtain from the
       subject for participation in the study.
@@ -63,48 +52,15 @@ properties:
     - Consent Exemption
     - Consent Waiver
     - Informed Consent
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  days_180_aki:
-    description: 180 days aki.
-    enum:
-    - 'Yes'
-    - 'No'
-    - Unknown
-  days_180_survival:
-    description: 180 days survival.
-    enum:
-    - alive
-    - dead
-    - Unknown
-  days_90_aki:
-    description: 90 days aki.
-    enum:
-    - 'Yes'
-    - 'No'
-    - Unknown
-  days_90_survival:
-    description: 90 days survival.
-    enum:
-    - alive
-    - dead
-    - Unknown
-  days_to_aki:
-    description: How many days from index date to aki.
+  inf_cnst_sign_dt:
+    description: The date the informed consent was signed.
     type:
-    - number
+    - string
   days_to_consent:
     description: Number of days between the date used for index and the date the subject
       consent was obtained for participation in the study.
     type:
     - number
-  days_to_death:
-    description: How many days from index date to death.
-    type:
-    - number
-  id:
-    $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
   index_date:
     description: The text term used to describe the reference or anchor date used
       when for date obfuscation, where a single date is obscurred by creating one
@@ -117,21 +73,23 @@ properties:
     - Recurrence
     - Sample Procurement
     - Study Enrollment
-  inf_cnst_sign_dt:
-    description: The date the informed consent was signed.
-    type:
-    - string
-  project_id:
-    $ref: _definitions.yaml#/project_id
-  rct_meld_strata:
-    description: The text term used to describe the MELD strata of the patient.
+  actarm:
+    description: "Description of actual Arm. When an Arm is not planned, ACTARM will\
+      \ be \u201CUnplanned Treatment\u201D. Randomized subjects who were not treated\
+      \ will be given a value of \u201CNot Treated\u201D. Values should be \u201C\
+      Screen Failure\u201D for screen failures and \u201CNot Assigned\u201D for subjects\
+      \ not assigned to treatment. Restricted to values in Trial Arms in all other\
+      \ cases."
     enum:
-    - Low(<=25)
-    - High(>25)
-  state:
-    $ref: _definitions.yaml#/state
-  studies:
-    $ref: _definitions.yaml#/to_one
+    - Prednisone
+    - Anakinra + Zinc
+    - Not Treated
+  cohort:
+    description: The text term used to describe the study arm of the patient.
+    enum:
+    - Heavy Drinker with Alcoholic Hepatits
+    - Heavy Drinker without Alcoholic Hepatits
+    - Healthy Donor
   study_site:
     description: The text term used to describe the study site location of the patient.
     enum:
@@ -151,35 +109,77 @@ properties:
     - UMass Medical School
     - UT Southwestern
     - UT Southwestern - Parkland
-  submitter_id:
+  bari_surgery:
+    description: Boolean variable that describes whether the patient ever had any
+      type of Bariatric Surgery?
+    enum:
+    - 'Yes'
+    - 'No'
+  ah_hosp:
+    description: Boolean variable that describes in the last year, were you hospitalized
+      due to Alcoholic Hepatitis?
+    enum:
+    - 'Yes'
+    - 'No'
+  ah_hosp_num:
+    description: Numeric term used to desceibe how many times that patient was hospitalized
+      for alcoholic hepatitis?
     type:
-    - string
-    - 'null'
-  type:
-    type: string
-  updated_datetime:
-    $ref: _definitions.yaml#/datetime
+    - number
+  rct_meld_strata:
+    description: The text term used to describe the MELD strata of the patient.
+    enum:
+    - Low(<=25)
+    - High(>25)
   vital_status:
     description: Vital status of the patient.
     enum:
     - alive
     - dead
     - Unknown
-required:
-- submitter_id
-- type
-- studies
-submittable: true
-systemProperties:
-- id
-- project_id
-- created_datetime
-- updated_datetime
-- state
-title: Case
-type: object
-uniqueKeys:
-- - id
-- - project_id
-  - submitter_id
-validators: null
+  days_to_death:
+    description: How many days from index date to death.
+    type:
+    - number
+  aki_status:
+    description: Aki status of the patient.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+  days_to_aki:
+    description: How many days from index date to aki.
+    type:
+    - number
+  days_90_survival:
+    description: 90 days survival.
+    enum:
+    - alive
+    - dead
+    - Unknown
+  days_180_survival:
+    description: 180 days survival.
+    enum:
+    - alive
+    - dead
+    - Unknown
+  days_90_aki:
+    description: 90 days aki.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+  days_180_aki:
+    description: 180 days aki.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+  studies:
+    $ref: _definitions.yaml#/to_one
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime

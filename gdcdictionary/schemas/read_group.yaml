@@ -1,61 +1,75 @@
 $schema: http://json-schema.org/draft-04/schema#
-additionalProperties: false
-category: biospecimen
-description: Sequencing reads from one lane of an NGS experiment.
 id: read_group
-links:
-- backref: read_groups
-  label: derived_from
-  multiplicity: many_to_one
-  name: aliquots
-  required: true
-  target_type: aliquot
+title: Read Group
+type: object
+description: Sequencing reads from one lane of an NGS experiment.
 namespace: http://gdc.nci.nih.gov
-program: '*'
+category: biospecimen
 project: '*'
+program: '*'
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- created_datetime
+- updated_datetime
+- state
+links:
+- name: aliquots
+  label: derived_from
+  target_type: aliquot
+  multiplicity: many_to_one
+  required: true
+  backref: read_groups
+required:
+- type
+- submitter_id
+- aliquots
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
 properties:
-  RIN:
-    term:
-      $ref: _terms.yaml#/RIN
-    type: number
-  adapter_name:
-    term:
-      $ref: _terms.yaml#/adapter_name
+  id:
+    $ref: _definitions.yaml#/UUID
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  submitter_id:
     type: string
-  adapter_sequence:
-    term:
-      $ref: _terms.yaml#/adapter_sequence
-    type: string
-  aliquots:
-    $ref: _definitions.yaml#/to_one
-  barcoding_applied:
-    description: 'True/False: was barcoding applied?'
-    type: boolean
-  base_caller_name:
-    term:
-      $ref: _terms.yaml#/base_caller_name
-    type: string
-  base_caller_version:
-    term:
-      $ref: _terms.yaml#/base_caller_version
-    type: string
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
+  state:
+    $ref: _definitions.yaml#/state
+  type:
+    enum:
+    - read_group
   experiment_name:
     term:
       $ref: _terms.yaml#/experiment_name
+    description: Submitter-defined name for the experiment.
     type: string
-  flow_cell_barcode:
+  sequencing_center:
     term:
-      $ref: _terms.yaml#/flow_cell_barcode
+      $ref: _terms.yaml#/sequencing_center
     type: string
-  id:
-    $ref: _definitions.yaml#/UUID
-  includes_spike_ins:
+  sequencing_date:
+    $ref: _definitions.yaml#/datetime
+  platform:
     term:
-      $ref: _terms.yaml#/includes_spike_ins
-    type: boolean
+      $ref: _terms.yaml#/platform
+    description: Name of the platform used to obtain data.
+    enum:
+    - Illumina
+    - SOLiD
+    - LS454
+    - Ion Torrent
+    - Complete Genomics
+    - PacBio
+    - Other
   instrument_model:
+    terms:
+      $ref: _terms.yaml#/instrument_model
+    description: Specific model of sequencing instrument used.
     enum:
     - 454 GS FLX Titanium
     - AB SOLiD 4
@@ -69,57 +83,21 @@ properties:
     - Illumina HiSeq 2000
     - Illumina HiSeq 2500
     - Illumina HiSeq 4000
+    - Illumina NovaSeq 6000
     - Illumina MiSeq
     - Illumina NextSeq
     - Ion Torrent PGM
     - Ion Torrent Proton
+    - Ion Torrent S5
     - PacBio RS
     - Ion S5 XL System, Ion 530 Chip
     - Other
-    terms:
-      $ref: _terms.yaml#/instrument_model
-  is_paired_end:
-    term:
-      $ref: _terms.yaml#/is_paired_end
-    type: boolean
-  library_name:
-    term:
-      $ref: _terms.yaml#/library_name
-    type: string
-  library_preparation_kit_catalog_number:
-    term:
-      $ref: _terms.yaml#/library_preparation_kit_catalog_number
-    type: string
-  library_preparation_kit_name:
-    term:
-      $ref: _terms.yaml#/library_preparation_kit_name
-    type: string
-  library_preparation_kit_vendor:
-    term:
-      $ref: _terms.yaml#/library_preparation_kit_vendor
-    type: string
-  library_preparation_kit_version:
-    term:
-      $ref: _terms.yaml#/library_preparation_kit_version
-    type: string
-  library_selection:
-    enum:
-    - Hybrid_Selection
-    - PCR
-    - Affinity_Enrichment
-    - Poly-T_Enrichment
-    - RNA_Depletion
-    - Other
-    term:
-      $ref: _terms.yaml#/library_selection
-  library_strand:
-    enum:
-    - Unstranded
-    - First_Stranded
-    - Second_Stranded
-    term:
-      $ref: _terms.yaml#/library_strand
+    - Unknown
+    - Not Reported
   library_strategy:
+    term:
+      $ref: _terms.yaml#/library_strategy
+    description: Library strategy.
     enum:
     - WGS
     - WXS
@@ -130,92 +108,276 @@ properties:
     - Validation
     - Amplicon
     - Other
+    - ATAC-Seq
+    - m6A MeRIP-Seq
+    - scATAC-Seq
+    - scRNA-Seq
+    - Targeted Sequencing
+    - DNA-Seq
+  RIN:
     term:
-      $ref: _terms.yaml#/library_strategy
-  platform:
-    enum:
-    - Illumina
-    - SOLiD
-    - LS454
-    - Ion Torrent
-    - Complete Genomics
-    - PacBio
-    - Other
+      $ref: _terms.yaml#/RIN
+    description: A numerical assessment of the integrity of RNA based on the entire
+      electrophoretic trace of the RNA sample including the presence or absence of
+      degradation products.
+    type: number
+  flow_cell_barcode:
     term:
-      $ref: _terms.yaml#/platform
-  project_id:
-    $ref: _definitions.yaml#/project_id
-  read_group_name:
-    description: Read Group Name
+      $ref: _terms.yaml#/flow_cell_barcode
+    description: Flow cell barcode. Wrong or missing information may affect analysis
+      results.
     type: string
-  read_length:
-    type: integer
-  sequencing_center:
+  includes_spike_ins:
     term:
-      $ref: _terms.yaml#/sequencing_center
-    type: string
-  sequencing_date:
-    $ref: _definitions.yaml#/datetime
-  size_selection_range:
+      $ref: _terms.yaml#/includes_spike_ins
+    description: Spike-in
+    type: boolean
+  spike_ins_fasta:
     term:
-      $ref: _terms.yaml#/size_selection_range
+      $ref: _terms.yaml#/spike_ins_fasta
     type: string
   spike_ins_concentration:
     term:
       $ref: _terms.yaml#/spike_ins_concentration
     type: string
-  spike_ins_fasta:
+  library_selection:
     term:
-      $ref: _terms.yaml#/spike_ins_fasta
-    type: string
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    type: string
-  target_capture_kit_catalog_number:
+      $ref: _terms.yaml#/library_selection
+    description: Library selection method.
+    enum:
+    - Hybrid_Selection
+    - PCR
+    - Affinity_Enrichment
+    - Poly-T_Enrichment
+    - RNA_Depletion
+    - Other
+    - miRNA Size Fractionation
+    - rRNA Depletion
+    - Random
+  library_preparation_kit_name:
     term:
-      $ref: _terms.yaml#/target_capture_kit_catalog_number
+      $ref: _terms.yaml#/library_preparation_kit_name
+    description: Name of library preparation kit.
+    type: string
+  library_preparation_kit_vendor:
+    term:
+      $ref: _terms.yaml#/library_preparation_kit_vendor
+    description: Vendor of library preparation kit.
+    type: string
+  library_preparation_kit_catalog_number:
+    term:
+      $ref: _terms.yaml#/library_preparation_kit_catalog_number
+    description: Catalog of library preparation kit.
+    type: string
+  library_preparation_kit_version:
+    term:
+      $ref: _terms.yaml#/library_preparation_kit_version
+    description: Version of library preparation kit.
+    type: string
+  library_name:
+    term:
+      $ref: _terms.yaml#/library_name
+    description: Name of the library.
     type: string
   target_capture_kit_name:
     term:
       $ref: _terms.yaml#/target_capture_kit_name
     type: string
-  target_capture_kit_target_region:
-    term:
-      $ref: _terms.yaml#/target_capture_kit_target_region
-    type: string
   target_capture_kit_vendor:
     term:
       $ref: _terms.yaml#/target_capture_kit_vendor
+    type: string
+  target_capture_kit_catalog_number:
+    term:
+      $ref: _terms.yaml#/target_capture_kit_catalog_number
     type: string
   target_capture_kit_version:
     term:
       $ref: _terms.yaml#/target_capture_kit_version
     type: string
+  target_capture_kit_target_region:
+    term:
+      $ref: _terms.yaml#/target_capture_kit_target_region
+    type: string
+  size_selection_range:
+    term:
+      $ref: _terms.yaml#/size_selection_range
+    type: string
+  adapter_name:
+    term:
+      $ref: _terms.yaml#/adapter_name
+    description: Name of the sequencing adapter.
+    type: string
+  adapter_sequence:
+    term:
+      $ref: _terms.yaml#/adapter_sequence
+    description: Base sequence of the sequencing adapter.
+    type: string
   to_trim_adapter_sequence:
     term:
       $ref: _terms.yaml#/to_trim_adapter_sequence
     type: boolean
-  type:
+  library_strand:
+    term:
+      $ref: _terms.yaml#/library_strand
+    description: Library stranded-ness.
     enum:
-    - read_group
+    - Unstranded
+    - First_Stranded
+    - Second_Stranded
+    - Not Applicable
+  base_caller_name:
+    term:
+      $ref: _terms.yaml#/base_caller_name
+    description: Name of the base caller.
+    type: string
+  base_caller_version:
+    term:
+      $ref: _terms.yaml#/base_caller_version
+    description: Version of the base caller.
+    type: string
+  is_paired_end:
+    term:
+      $ref: _terms.yaml#/is_paired_end
+    description: Are the reads paired end?
+    type: boolean
+  read_length:
+    type: integer
+    description: The length of the reads.
+  read_group_name:
+    description: Read group name.
+    type: string
+  barcoding_applied:
+    description: 'True/False: was barcoding applied?'
+    type: boolean
+  chipseq_antibody:
+    description: 'NEW: The antibody used in the ChIP-Seq assay.'
+    enum:
+    - abcam ab4729 anti-H3K27ac
+    - Unknown
+    - Not Applicable
+  chipseq_target:
+    description: 'NEW: The antibody used in the ChIP-Seq assay.'
+    enum:
+    - H3K4me1
+    - H3K4me3
+    - H3K9me3
+    - H3K27me3
+    - H3K36me3
+    - H3K27ac
+    - Input Control
+    - Unknown
+  days_to_sequencing:
+    description: 'NEW: Number of days between the date used for index and the date
+      the read group was sequenced.'
+    type: integer
+    minimum: -32872
+  fragment_maximum_length:
+    description: 'NEW: Maximum length of the sequenced fragments (e.g., as predicted
+      by Agilent Bioanalyzer).'
+    type: integer
+    minimum: 0
+  fragment_mean_length:
+    description: 'NEW: Mean length of the sequenced fragments (e.g., as predicted
+      by Agilent Bioanalyzer).'
+    type: number
+    minimum: 0
+  fragment_minimum_length:
+    description: 'NEW: Minimum length of the sequenced fragments (e.g., as predicted
+      by Agilent Bioanalyzer).'
+    type: integer
+    minimum: 0
+  fragment_standard_deviation_length:
+    description: 'NEW: Standard deviation of the sequenced fragments length (e.g.,
+      as predicted by Agilent Bioanalyzer).'
+    type: number
+    minimum: 0
+  fragmentation_enzyme:
+    description: 'NEW: The restriction enzyme used for nucleotide fragmentation.'
+    enum:
+    - MboI
+    - Unknown
+    - Not Applicable
+  lane_number:
+    description: 'NEW: The basic machine unit for sequencing. For Illumina machines,
+      this reflects the physical lane number. Wrong or missing information may affect
+      analysis results.'
+    type: integer
+    minimum: 1
+  multiplex_barcode:
+    description: 'NEW: The barcode/index sequence used. Wrong or missing information
+      may affect analysis results.'
+    type: string
+    pattern: ^[0-9ACGTURYSWKMBDHVN]+([\+\-][0-9ACGTURYSWKMBDHVN]+){,2}$
+  number_expect_cells:
+    description: 'NEW: Expected number of recovered cells in droplet-based single-cell
+      libraries.'
+    type: integer
+    minimum: 0
+  single_cell_library:
+    description: 'NEW: Library preparation strategy that distinguishes different single-cell
+      assays.'
+    enum:
+    - Chromium 3' Gene Expression v2 Library
+    - Chromium 3' Gene Expression v3 Library
+    - Chromium scATAC v1 Library
+    - Smart-Seq2
+  target_capture_kit:
+    description: 'NEW: Description that can uniquely identify a target capture kit.
+      Suggested value is a combination of vendor, kit name, and kit version.'
+    enum:
+    - Custom AmpliSeq Cancer Hotspot GENIE-MDA Augmented Panel v1 - 46 Genes
+    - Custom GENIE-DFCI OncoPanel - 275 Genes
+    - Custom GENIE-DFCI Oncopanel - 300 Genes
+    - Custom GENIE-DFCI Oncopanel - 447 Genes
+    - Custom HaloPlex DLBCL Panel - 370 Genes
+    - Custom Ion AmpliSeq Hotspot GENIE-MOSC3 Augmented Panel - 74 Genes
+    - Custom Large Construct Capture TARGET-OS Panel - 8 Genes
+    - Custom MSK IMPACT Panel - 341 Genes
+    - Custom MSK IMPACT Panel - 410 Genes
+    - Custom MSK IMPACT Panel - 468 Genes
+    - Custom Myeloid GENIE-VICC Panel - 37 Genes
+    - Custom Personalis ACEcp VAREPOP-APOLLO Panel v2
+    - Custom PGDX SureSelect CancerSelect VAREPOP-APOLLO Panel - 203 Genes
+    - Custom PGDX SureSelect CancerSelect VAREPOP-APOLLO Panel - 88 Genes
+    - Custom SeqCap EZ BeatAML Panel - 12.5 Mb
+    - Custom SeqCap EZ HGSC VCRome v2.1 ER Augmented v1
+    - Custom SeqCap EZ HGSC VCRome v2.1 ER Augmented v2
+    - Custom SeqCap EZ TARGET-OS Panel - 7.0 Mb
+    - Custom Solid Tumor GENIE-VICC Panel - 34 Genes
+    - Custom SureSelect CGCI-BLGSP Panel - 4.6 Mb
+    - Custom SureSelect CGCI-HTMCP-CC KMT2D And Hotspot Panel - 37.0 Kb
+    - Custom SureSelect CGCI-HTMCP-CC Panel - 19.7 Mb
+    - Custom SureSelect GENIE-UHN Panel - 555 Genes
+    - Custom SureSelect Human All Exon v1.1 Plus 3 Boosters
+    - Custom SureSelect TARGET-AML_NBL_WT Panel - 2.8 Mb
+    - Custom Twist Broad Exome v1.0 - 35.0 Mb
+    - Custom Twist Broad PanCancer Panel - 396 Genes
+    - Custom Twist MP2PRT-WT Panel - 52 Kb
+    - Foundation Medicine T5a Panel - 322 Genes
+    - Foundation Medicine T7 Panel - 429 Genes
+    - Ion AmpliSeq Cancer Hotspot Panel v2
+    - Ion AmpliSeq Comprehensive Cancer Panel
+    - Nextera DNA Exome
+    - Nextera Rapid Capture Exome v1.2
+    - Not Applicable
+    - SeqCap EZ HGSC VCRome v2.1
+    - SeqCap EZ Human Exome v2.0
+    - SeqCap EZ Human Exome v3.0
+    - SureSelect Human All Exon v3
+    - SureSelect Human All Exon v4
+    - SureSelect Human All Exon v5
+    - SureSelect Human All Exon v5 + UTR
+    - TruSeq Amplicon Cancer Panel
+    - TruSeq Exome Enrichment - 62 Mb
+    - TruSeq RNA Exome
+    - TruSight Myeloid Sequencing Panel
+    - Twist Human Comprehensive Exome
+    - xGen Exome Research Panel v1.0
+    - Unknown
+  aliquots:
+    $ref: _definitions.yaml#/to_one
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-required:
-- type
-- submitter_id
-- aliquots
-submittable: true
-systemProperties:
-- id
-- project_id
-- created_datetime
-- updated_datetime
-- state
-title: Read Group
-type: object
-uniqueKeys:
-- - id
-- - project_id
-  - submitter_id
-validators: null
