@@ -28,7 +28,6 @@ links:
     multiplicity: one_to_one
     required: true
 required:
-- type
 - submitter_id
 - workflow_link
 - workflow_type

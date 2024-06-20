@@ -34,7 +34,6 @@ links:
     multiplicity: many_to_many
     required: false
 required:
-- type
 - submitter_id
 - workflow_link
 - workflow_type

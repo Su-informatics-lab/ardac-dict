@@ -126,7 +126,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "workflow_link",
       "workflow_type"
@@ -222,7 +221,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "file_name",
       "file_size",
@@ -354,7 +352,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "file_name",
       "file_size",
@@ -456,7 +453,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "workflow_link",
       "workflow_type"
@@ -546,7 +542,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "file_name",
       "file_size",
@@ -671,7 +666,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "workflow_link",
       "workflow_type"
@@ -755,7 +749,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "file_name",
       "file_size",
@@ -863,7 +856,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "workflow_link",
       "workflow_type"
@@ -1065,7 +1057,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "workflow_link",
       "workflow_type"
@@ -1142,7 +1133,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "file_name",
       "file_size",
@@ -1251,7 +1241,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "file_name",
       "file_size",
@@ -1480,7 +1469,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "file_name",
       "file_size",
@@ -1702,7 +1690,6 @@
       }
     ],
     "required": [
-      "type",
       "submitter_id",
       "file_name",
       "file_size",
@@ -2260,7 +2247,6 @@
         }
       ],
       "required": [
-        "type",
         "submitter_id",
         "file_name",
         "file_size",
