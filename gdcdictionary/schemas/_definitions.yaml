@@ -164,6 +164,8 @@ project_id:
   term:
     $ref: _terms.yaml#/project_id
 data_file_properties:
+  type:
+    type: string
   id:
     $ref: '#/UUID'
     systemAlias: node_id
@@ -203,6 +205,8 @@ data_file_properties:
   updated_datetime:
     $ref: '#/datetime'
 workflow_properties:
+  type:
+    type: string
   id:
     $ref: '#/UUID'
     systemAlias: node_id

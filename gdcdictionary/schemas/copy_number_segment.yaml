@@ -23,24 +23,30 @@ links:
 - exclusive: true
   required: true
   subgroup:
-  - name: copy_number_liftover_workflows
-    backref: copy_number_segments
-    label: derived_from
-    target_type: copy_number_liftover_workflow
-    multiplicity: one_to_one
-    required: false
-  - name: genomic_profile_harmonization_workflows
-    backref: copy_number_segments
-    label: derived_from
-    target_type: genomic_profile_harmonization_workflow
-    multiplicity: one_to_one
-    required: false
-  - name: somatic_copy_number_workflows
-    backref: copy_number_segments
-    label: derived_from
-    target_type: somatic_copy_number_workflow
-    multiplicity: one_to_one
-    required: false
+    - name: core_metadata_collections
+      backref: copy_number_segments
+      label: data_from
+      target_type: core_metadata_collection
+      multiplicity: many_to_one
+      required: false
+    - name: copy_number_liftover_workflows
+      backref: copy_number_segments
+      label: derived_from
+      target_type: copy_number_liftover_workflow
+      multiplicity: one_to_one
+      required: false
+    - name: genomic_profile_harmonization_workflows
+      backref: copy_number_segments
+      label: derived_from
+      target_type: genomic_profile_harmonization_workflow
+      multiplicity: one_to_one
+      required: false
+    - name: somatic_copy_number_workflows
+      backref: copy_number_segments
+      label: derived_from
+      target_type: somatic_copy_number_workflow
+      multiplicity: one_to_one
+      required: false
 required:
 - type
 - submitter_id
@@ -89,6 +95,8 @@ properties:
     enum:
     - Affymetrix SNP 6.0
     - Illumina
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_many"
   copy_number_liftover_workflows:
     $ref: _definitions.yaml#/to_one
   genomic_profile_harmonization_workflows:
