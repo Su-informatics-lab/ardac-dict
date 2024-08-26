@@ -1,64 +1,42 @@
 $schema: http://json-schema.org/draft-04/schema#
-additionalProperties: false
+id: submitted_methylation
+title: Submitted Methylation
+type: object
+namespace: https://www.bloodpac.org/
 category: data_file
+program: '*'
+project: '*'
 description: DNA methylation data files contain information on raw and normalized
   signal intensities, detection confidence and calculated beta values for methylated
   and unmethylated probes. DNA methylation is an epigenetic mark which can be associated
   with transcriptional inactivity when located in promoter regions.
-id: submitted_methylation
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- created_datetime
+- updated_datetime
+- state
+- file_state
+- error_type
 links:
 - exclusive: false
   required: true
   subgroup:
-  - backref: submitted_methylation_files
+  - name: core_metadata_collections
+    backref: submitted_methylation_files
     label: data_from
-    multiplicity: many_to_many
-    name: core_metadata_collections
-    required: false
     target_type: core_metadata_collection
-  - backref: submitted_methylation_files
-    label: data_from
-    multiplicity: many_to_one
-    name: aliquots
+    multiplicity: many_to_many
     required: false
+  - name: aliquots
+    backref: submitted_methylation_files
+    label: data_from
     target_type: aliquot
-namespace: https://www.bloodpac.org/
-program: '*'
-project: '*'
-properties:
-  $ref: _definitions.yaml#/data_file_properties
-  aliquots:
-    $ref: _definitions.yaml#/to_one
-  assay_instrument:
-    enum:
-    - Illumina
-  assay_instrument_model:
-    enum:
-    - Illumina Infinium HumanMethylation450
-    - Illumina Infinium HumanMethylation450K
-  assay_method:
-    enum:
-    - Methylation Array
-  core_metadata_collections:
-    $ref: _definitions.yaml#/to_many
-  data_category:
-    enum:
-    - Methylation Data
-    term:
-      $ref: _terms.yaml#/data_category
-  data_format:
-    enum:
-    - IDAT
-    term:
-      $ref: _terms.yaml#/data_format
-  data_type:
-    enum:
-    - Methylation Intensity Values
-    term:
-      $ref: _terms.yaml#/data_type
-  type:
-    enum:
-    - submitted_methylation
+    multiplicity: many_to_one
+    required: false
 required:
 - submitter_id
 - type
@@ -68,19 +46,41 @@ required:
 - data_category
 - data_type
 - data_format
-submittable: true
-systemProperties:
-- id
-- project_id
-- created_datetime
-- updated_datetime
-- state
-- file_state
-- error_type
-title: Submitted Methylation
-type: object
 uniqueKeys:
 - - id
 - - project_id
   - submitter_id
-validators: null
+properties:
+  $ref: _definitions.yaml#/data_file_properties
+  type:
+    enum:
+    - submitted_methylation
+  data_category:
+    term:
+      $ref: _terms.yaml#/data_category
+    enum:
+    - Methylation Data
+  data_type:
+    term:
+      $ref: _terms.yaml#/data_type
+    enum:
+    - Methylation Intensity Values
+  data_format:
+    term:
+      $ref: _terms.yaml#/data_format
+    enum:
+    - IDAT
+  assay_method:
+    enum:
+    - Methylation Array
+  assay_instrument:
+    enum:
+    - Illumina
+  assay_instrument_model:
+    enum:
+    - Illumina Infinium HumanMethylation450
+    - Illumina Infinium HumanMethylation450K
+  aliquots:
+    $ref: _definitions.yaml#/to_one
+  core_metadata_collections:
+    $ref: _definitions.yaml#/to_many

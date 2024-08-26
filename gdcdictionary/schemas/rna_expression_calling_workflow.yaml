@@ -1,0 +1,82 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: rna_expression_calling_workflow
+title: RNA Expression Calling Workflow
+type: object
+namespace: https://gdc.cancer.gov
+category: analysis
+project: '*'
+program: '*'
+description: Metadata for the RNA expression pipeline used to quantify RNA gene and
+  exon expression from unharmonized or GDC harmonized data.
+additionalProperties: false
+submittable: false
+validators: null
+systemProperties:
+- id
+- project_id
+- created_datetime
+- updated_datetime
+- state
+links:
+- exclusive: true
+  required: true
+  subgroup:
+  - name: aligned_reads_files
+    backref: rna_expression_calling_workflows
+    label: performed_on
+    target_type: aligned_reads
+    multiplicity: many_to_one
+    required: false
+  - name: submitted_aligned_reads_files
+    backref: rna_expression_calling_workflows
+    label: performed_on
+    target_type: submitted_aligned_reads
+    multiplicity: many_to_one
+    required: false
+  - name: submitted_unaligned_reads_files
+    backref: rna_expression_calling_workflows
+    label: performed_on
+    target_type: submitted_unaligned_reads
+    multiplicity: many_to_one
+    required: false
+required:
+- type
+- submitter_id
+- workflow_link
+- workflow_type
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  $ref: _definitions.yaml#/workflow_properties
+  type:
+    enum:
+    - rna_expression_calling_workflow
+  workflow_type:
+    term:
+      $ref: _terms.yaml#/workflow_type
+    enum:
+    - CellRanger - 10x Filtered Counts
+    - CellRanger - 10x Raw Counts
+    - Cufflinks
+    - DEXSeq
+    - HTSeq - Counts
+    - HTSeq - FPKM
+    - HTSeq - FPKM-UQ
+    - Kallisto - HDF5
+    - Kallisto - Quantification
+    - RNA-SeQC - Counts
+    - RNA-SeQC - FPKM
+    - RSEM - Quantification
+    - STAR - Counts
+    - STAR - FPKM
+    - STAR - Smart-Seq2 Raw Counts
+    - STAR - Smart-Seq2 Filtered Counts
+    - zUMIs - Smart-Seq2 Counts
+  aligned_reads_files:
+    $ref: _definitions.yaml#/to_one
+  submitted_aligned_reads_files:
+    $ref: _definitions.yaml#/to_one
+  submitted_unaligned_reads_files:
+    $ref: _definitions.yaml#/to_one

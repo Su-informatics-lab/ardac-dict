@@ -1,49 +1,48 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: submitted_somatic_mutation
-title: Submitted Somatic Mutation
+id: mirna_expression
+title: miRNA Expression
 type: object
-namespace: http://gdc.nci.nih.gov
+namespace: https://dcp.bionimbus.org/
 category: data_file
-program: '*'
 project: '*'
-description: 'Data file containing somatic mutation calls from a read group.
-
-  '
+program: '*'
+description: Data file containing miRNA expression information  generated internally
+  by the GDC.
 additionalProperties: false
-submittable: true
+submittable: false
 validators: null
 systemProperties:
 - id
 - project_id
 - created_datetime
 - updated_datetime
-- state
 - file_state
+- state
 - error_type
 links:
 - exclusive: false
   required: true
   subgroup:
   - name: core_metadata_collections
-    backref: submitted_somatic_mutations
+    backref: mirna_expressions
     label: data_from
     target_type: core_metadata_collection
-    multiplicity: many_to_many
+    multiplicity: many_to_one
     required: false
-  - name: read_groups
-    backref: submitted_somatic_mutations
-    label: derived_from
-    target_type: read_group
-    multiplicity: many_to_many
+  - name: mirna_expression_calling_workflows
+    backref: mirna_expressions
+    label: data_from
+    target_type: mirna_expression_calling_workflow
+    multiplicity: many_to_one
     required: false
 required:
-- submitter_id
 - type
+- submitter_id
 - file_name
 - file_size
-- data_format
 - md5sum
 - data_category
+- data_format
 - data_type
 - experimental_strategy
 uniqueKeys:
@@ -52,30 +51,31 @@ uniqueKeys:
   - submitter_id
 properties:
   $ref: _definitions.yaml#/data_file_properties
-  type:
-    enum:
-    - submitted_somatic_mutation
   data_category:
     term:
       $ref: _terms.yaml#/data_category
-    type: string
+    enum:
+    - Transcriptome Profiling
   data_type:
     term:
       $ref: _terms.yaml#/data_type
-    type: string
+    enum:
+    - Isoform Expression Quantification
+    - miRNA Expression Quantification
+    - Supplementary Files
   data_format:
     term:
       $ref: _terms.yaml#/data_format
-    type: string
+    enum:
+    - CSV
+    - TSV
+    - TXT
   experimental_strategy:
     term:
       $ref: _terms.yaml#/experimental_strategy
-    type: string
-  total_variants:
-    description: The total number of variants detected carrying a base change difference
-      from the reference genome.
-    type: integer
-  read_groups:
-    $ref: _definitions.yaml#/to_many
+    enum:
+    - miRNA-Seq
+  mirna_expression_calling_workflows:
+    $ref: _definitions.yaml#/to_one
   core_metadata_collections:
-    $ref: _definitions.yaml#/to_many
+    $ref: _definitions.yaml#/to_one

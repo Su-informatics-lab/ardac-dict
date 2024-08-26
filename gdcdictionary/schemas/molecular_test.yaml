@@ -1,59 +1,65 @@
 $schema: http://json-schema.org/draft-04/schema#
-additionalProperties: false
+id: molecular_test
+title: Molecular_test
+type: object
+namespace: http://gdc.nci.nih.gov
 category: clinical
+program: '*'
+project: '*'
 description: 'Data for the characterization of the patient by means of segementing
   the population (e.g., characterization by age, sex, or race).
 
   '
-id: molecular_test
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
 links:
-- backref: molecular_tests
+- name: follow_ups
+  backref: molecular_tests
   label: describes
-  multiplicity: many_to_one
-  name: follow_ups
-  required: true
   target_type: follow_up
-- backref: molecular_tests
-  label: describes
   multiplicity: many_to_one
-  name: labs
-  required: false
+  required: true
+- name: labs
+  backref: molecular_tests
+  label: describes
   target_type: lab
-- backref: molecular_tests
-  label: describes
   multiplicity: many_to_one
-  name: aliquots
   required: false
+- name: aliquots
+  backref: molecular_tests
+  label: describes
   target_type: aliquot
-namespace: http://gdc.nci.nih.gov
+  multiplicity: many_to_one
+  required: false
+required:
+- submitter_id
+- type
+- follow_ups
 preferred:
 - year_of_death
-program: '*'
-project: '*'
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
 properties:
-  aliquots:
-    $ref: _definitions.yaml#/to_one
-  blood_test_normal_range_lower:
-    description: Numeric value used to describe the lower limit of the normal range
-      used to describe a healthy individual at the institution where the test was
-      completed.
+  type:
+    type: string
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
     type:
-    - number
-  blood_test_normal_range_upper:
-    description: Numeric value used to describe the upper limit of the normal range
-      used to describe a healthy individual at the institution where the test was
-      completed.
-    type:
-    - number
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  days_to_test:
-    description: Number of days between the date used for index and the date of the
-      laboratory test.
-    type:
-    - number
-  follow_ups:
-    $ref: _definitions.yaml#/to_one
+    - string
+    - 'null'
   gene_symbol:
     description: The text term used to describe a gene targeted or included in molecular
       analysis. For rearrangements, this is shold be used to represent the reference
@@ -781,9 +787,66 @@ properties:
     - ZRSR2
     - Unknown
     - Not Reported
-  id:
-    $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
+  molecular_analysis_method:
+    description: The text term used to describe the method used for molecular analysis.
+    enum:
+    - Comparative Genomic Hybridization
+    - Cytogenetics, NOS
+    - FISH
+    - Flow Cytometry
+    - IHC
+    - Immunofluorescence
+    - ISH
+    - Karyotype
+    - Microarray
+    - Microsatellite Analysis
+    - Nuclear Staining
+    - Other
+    - PCR
+    - RNA Sequencing
+    - RT-PCR
+    - Sequencing, NOS
+    - Southern Blotting
+    - Targeted Sequencing
+    - WGS
+    - WXS
+    - Unknown
+    - Not Reported
+  test_result:
+    description: The text term used to describe the result of the molecular test.
+      If the test result was a numeric value see test_value.
+    enum:
+    - Abnormal
+    - Copy Number Reported
+    - Equivocal
+    - High
+    - Intermediate
+    - Loss of Expression
+    - Low
+    - Negative
+    - Normal
+    - Overexpressed
+    - Positive
+    - Test Value Reported
+    - Unknown
+    - Not Reported
+  blood_test_normal_range_lower:
+    description: Numeric value used to describe the lower limit of the normal range
+      used to describe a healthy individual at the institution where the test was
+      completed.
+    type:
+    - number
+  blood_test_normal_range_upper:
+    description: Numeric value used to describe the upper limit of the normal range
+      used to describe a healthy individual at the institution where the test was
+      completed.
+    type:
+    - number
+  days_to_test:
+    description: Number of days between the date used for index and the date of the
+      laboratory test.
+    type:
+    - number
   laboratory_test:
     description: The text term used to describe the medical testing used to diagnose,
       treat or further understand a patient's disease.
@@ -880,89 +943,26 @@ properties:
     - Urine KIM-1
     - Urine L-FABP
     - Urine NGAL
-  labs:
-    $ref: _definitions.yaml#/to_one
-  molecular_analysis_method:
-    description: The text term used to describe the method used for molecular analysis.
-    enum:
-    - Comparative Genomic Hybridization
-    - Cytogenetics, NOS
-    - FISH
-    - Flow Cytometry
-    - IHC
-    - Immunofluorescence
-    - ISH
-    - Karyotype
-    - Microarray
-    - Microsatellite Analysis
-    - Nuclear Staining
-    - Other
-    - PCR
-    - RNA Sequencing
-    - RT-PCR
-    - Sequencing, NOS
-    - Southern Blotting
-    - Targeted Sequencing
-    - WGS
-    - WXS
-    - Unknown
-    - Not Reported
-  project_id:
-    $ref: _definitions.yaml#/project_id
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    type:
-    - string
-    - 'null'
-  test_result:
-    description: The text term used to describe the result of the molecular test.
-      If the test result was a numeric value see test_value.
-    enum:
-    - Abnormal
-    - Copy Number Reported
-    - Equivocal
-    - High
-    - Intermediate
-    - Loss of Expression
-    - Low
-    - Negative
-    - Normal
-    - Overexpressed
-    - Positive
-    - Test Value Reported
-    - Unknown
-    - Not Reported
-  test_unit:
-    description: The unit for the test
-    type:
-    - string
-    - 'null'
   test_value:
     description: The text term or numeric value used to describe a sepcific result
       of a molecular test.
     type:
     - string
     - 'null'
-  type:
-    type: string
+  test_unit:
+    description: The unit for the test
+    type:
+    - string
+    - 'null'
+  follow_ups:
+    $ref: _definitions.yaml#/to_one
+  aliquots:
+    $ref: _definitions.yaml#/to_one
+  labs:
+    $ref: _definitions.yaml#/to_one
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-required:
-- submitter_id
-- type
-- follow_ups
-submittable: true
-systemProperties:
-- id
-- project_id
-- state
-- created_datetime
-- updated_datetime
-title: Molecular_test
-type: object
-uniqueKeys:
-- - id
-- - project_id
-  - submitter_id
-validators: null
