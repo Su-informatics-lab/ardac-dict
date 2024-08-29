@@ -163,3 +163,4 @@ cython_debug/
 
 # Artifacts
 artifacts/
+results.xml
