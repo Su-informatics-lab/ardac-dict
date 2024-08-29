@@ -9,6 +9,9 @@ Begin by cloning the repository to your local machine.
 git clone git@github.com:Su-informatics-lab/ardac-dict.git
 ```
 
+> [!NOTE]
+> The example above assumes that you are working from the command line and have SSH keys set up with GitHub. If you are using the GitHub desktop application or VSCode, you can clone the repository using the HTTPS URL instead.
+
 ## Step 2: Create a new branch
 Create a new branch for your changes. The branch name should be descriptive of the changes you are making. If it is a bug fix, consider something like `bug/fix-node-properties`. If it is a feature enhancement, consider something like `feat/new-file-type`.
 
@@ -43,6 +46,8 @@ docker run --rm -v $(pwd):/mnt/host quay.io/rds/dictutils
 > You can alias this command in your shell to make it easier to run. For example, you could add the following to your `.bashrc` or `.bash_profile` file:
 > ```bash
 > validate() { docker run --rm -v $(pwd):/mnt/host quay.io/rds/dictutils; }
+> ```
+> Then you can run the command by typing `validate` in the terminal.
 
 ## Step 6: Commit your changes
 After you inspect the `schema.json` file and are satisfied with the changes, commit your changes to the repository. This will allow you to push your new `schema.json` file to the remote repository on your branch, making it available for deployments in a Gen3 environment.
@@ -64,7 +69,7 @@ After your changes have been merged into the `main` branch, create a new release
 
 1. Go to the [releases page](https://github.com/Su-informatics-lab/ardac-dict/releases) for the repository.
 2. Click the "Draft a new release" button.
-3. Enter the appropriate version number by clicking on the `Choose a tag` dropdown. Follow the [Semantic Versioning](https://semver.org/) guidelines. If this is a bug fix, increment the patch version (e.g., `1.0.1`). If this is a feature enhancement, increment the minor version (e.g., `1.1.0`).
+3. Enter the appropriate version number by clicking on the `Choose a tag` dropdown. Follow the [Semantic Versioning](https://semver.org/) guidelines. If this is a bug fix, increment the patch version (e.g., `2.0.1`). If this is a feature enhancement, increment the minor version (e.g., `2.1.0`). If this is a breaking change, increment the major version (e.g., `3.0.0`).
 4. Enter a title for the release. This should be the same as the version number.
 5. Enter a description of the changes that were made in this release. This should be a summary of the changes that were made in the branch that was merged into `main`.
 6. Click the "Publish release" button.
