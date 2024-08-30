@@ -1,0 +1,37 @@
+name: Dictionary tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run validation
+        run: docker run --rm -v ${{ github.workspace }}:/mnt/host quay.io/rds/dictutils
+
+      - name: Annotate PR
+        if: failure()
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const fs = require('fs');
+            const results = fs.readFileSync('results.xml', 'utf8');
+            github.rest.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'Validation Results',
+              head_sha: context.sha,
+              status: 'completed',
+              conclusion: 'failure',
+              output: {
+                title: 'Validation Results',
+                summary: 'Validation process failed',
+                text: results
+              }
+            });
