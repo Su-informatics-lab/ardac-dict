@@ -14,27 +14,3 @@ jobs:
 
       - name: Run validation
         run: docker run --rm -v ${{ github.workspace }}:/mnt/host quay.io/rds/dictutils
-
-      - name: Annotate PR
-        if: failure()
-        uses: actions/github-script@v3
-        with:
-          script: |
-            const fs = require('fs');
-            const results = fs.readFileSync('results.xml', 'utf8');
-            const { context, getOctokit } = require('@actions/github');
-            const github = getOctokit(process.env.GITHUB_TOKEN);
-            
-            github.rest.checks.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              name: 'Validation Results',
-              head_sha: context.sha,
-              status: 'completed',
-              conclusion: 'failure',
-              output: {
-                title: 'Validation Results',
-                summary: 'Validation process failed',
-                text: results
-              }
-            });
