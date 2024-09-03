@@ -164,3 +164,9 @@ cython_debug/
 # Artifacts
 artifacts/
 results.xml
+
+# Miscellaneous
+.DS_Store
+.vscode
+.idea
+*.zip
