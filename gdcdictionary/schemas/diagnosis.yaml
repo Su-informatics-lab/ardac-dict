@@ -26,6 +26,12 @@ links:
   label: describes
   target_type: case
   multiplicity: many_to_one
+  required: false
+- name: follow_ups
+  backref: diagnoses
+  label: describes
+  target_type: follow_up
+  multiplicity: many_to_one
   required: true
 required:
 - submitter_id
@@ -773,6 +779,8 @@ properties:
     - number
     - 'null'
   cases:
+    $ref: _definitions.yaml#/to_one
+  follow_ups:
     $ref: _definitions.yaml#/to_one
   project_id:
     $ref: _definitions.yaml#/project_id

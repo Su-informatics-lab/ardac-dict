@@ -28,6 +28,12 @@ links:
   label: describes
   target_type: diagnosis
   multiplicity: many_to_one
+  required: false
+- name: follow_ups
+  backref: treatments
+  label: describes
+  target_type: follow_up
+  multiplicity: many_to_one
   required: true
 uniqueKeys:
 - - id
@@ -186,6 +192,8 @@ properties:
     - Not Reported
     - Not Allowed To Collect
   diagnoses:
+    $ref: _definitions.yaml#/to_one
+  follow_ups:
     $ref: _definitions.yaml#/to_one
   project_id:
     $ref: _definitions.yaml#/project_id
