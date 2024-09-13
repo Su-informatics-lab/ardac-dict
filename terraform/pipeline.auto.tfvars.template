@@ -1,0 +1,11 @@
+config                     = [""]                                  #path to AWS config file, e.g. ~/.aws/config
+credentials                = [""]                                  #path to AWS credentials file, e.g. ~/.aws/credentials
+profile                    = "default"                             #name of AWS credentials profile
+region                     = "us-east-1"                           #AWS region
+account                    = "111122223333"                        #AWS account
+distribution               = "E1234567890"                         #CloudFront distribution ID
+build_project              = "ardac-dictionary-deployment"         #Name of the CodeBuild project for the website
+invalidation_build_project = "ardac-dictionary-invalidation"       #Name of the CodeBuild project to clear the CloudFront cache
+repository                 = "Su-informatics-lab/ardac-website"    #Name of the GitHub repository (org/repo)
+codestar                   = "mycodestar"                          #Name of the CodeStar connection
+bucket                     = "dictionary.ardac.org"                #Name of the S3 bucket for the website
