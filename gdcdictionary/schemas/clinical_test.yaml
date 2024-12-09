@@ -42,7 +42,6 @@ required:
 - biomarker_name
 - biomarker_result
 - biomarker_test_method
-- cases
 uniqueKeys:
 - - id
 - - project_id
