@@ -81,7 +81,7 @@ properties:
     - RNA-Seq
     - scRNA-Seq
     - Total RNA-Seq
-  rna_expression_workflows:
+  rna_expression_calling_workflows:
     $ref: _definitions.yaml#/to_one
   core_metadata_collections:
     $ref: _definitions.yaml#/to_one

@@ -23,20 +23,25 @@ links:
   label: performed_for
   target_type: case
   multiplicity: many_to_one
-  required: true
+  required: false
 - name: diagnoses
   backref: clinical_tests
   label: relates_to
   target_type: diagnosis
   multiplicity: many_to_many
   required: false
+- name: follow_ups
+  backref: clinical_tests
+  label: describes
+  target_type: follow_up
+  multiplicity: many_to_one
+  required: true
 required:
 - submitter_id
 - type
 - biomarker_name
 - biomarker_result
 - biomarker_test_method
-- cases
 uniqueKeys:
 - - id
 - - project_id
@@ -207,6 +212,8 @@ properties:
     $ref: _definitions.yaml#/to_one
   diagnoses:
     $ref: _definitions.yaml#/to_many
+  follow_ups:
+    $ref: _definitions.yaml#/to_one
   project_id:
     $ref: _definitions.yaml#/project_id
   created_datetime:
