@@ -37,8 +37,8 @@ links:
   multiplicity: many_to_one
   required: true
 required:
-- submitter_id
 - type
+- submitter_id
 - biomarker_name
 - biomarker_result
 - biomarker_test_method
