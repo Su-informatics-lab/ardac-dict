@@ -75,7 +75,6 @@ properties:
     - '180'
     - '84'
     - '168'
-    - TEST!!!!!
   cdc_hiv_risk_factors:
     description: The text term used to describe a risk factor for human immunodeficiency
       virus, as described by the Center for Disease Control.
@@ -141,11 +140,14 @@ properties:
     enum:
     - 'Yes'
     - 'No'
+    - Missing
+    - Not Done
   urine_culture_result:
     description: The text term used to describe the results of the urine culture test.
     enum:
     - Positive
     - Negative
+    - Missing
   urine_culture_organism:
     description: Text used to describe the organism growth found during urine culture
       test.
@@ -170,11 +172,14 @@ properties:
     - 'Yes'
     - 'No'
     - Not Reported
+    - Not Done
+    - Missing
   ascites_culture_result:
     description: The text used to describe the results of the ascites culture test.
     enum:
     - Positive
     - Negative
+    - Missing
   ascites_organism:
     description: The text term used to describe the organism growth found ascites
       culture.
@@ -255,6 +260,7 @@ properties:
     - Medium
     - Large
     - Not Reported
+    - Missing
   esophageal_varices_bleed:
     description: The yes/no indicator used to describe if there were signs of recent
       bleeding from the esophageal varices.
@@ -262,6 +268,7 @@ properties:
     - 'Yes'
     - 'No'
     - Not Reported
+    - Missing
   gastric_varices_size:
     description: The text term used to describe the size of gastric varices found
       during endoscopy.
@@ -270,6 +277,7 @@ properties:
     - Medium
     - Large
     - Not Reported
+    - Missing
   gastric_varices_bleed:
     description: The yes/no indicator used to describe if there were signs of recent
       bleeding from the gastric varices.
@@ -277,6 +285,7 @@ properties:
     - 'Yes'
     - 'No'
     - Not Reported
+    - Missing
   portal_hypertensive_gastropathy:
     description: The text term used to describe portal hypertensive gastropathy found
       on endoscopy.
@@ -287,6 +296,7 @@ properties:
     - Yes, Unknown severity
     - None
     - Not Reported
+    - Missing
   endoscopy_ulcer_present:
     description: The text term used to describe ulcers or erosions present on endoscopy.
     enum:
@@ -305,6 +315,7 @@ properties:
     - Medium
     - Large
     - Not Reported
+    - Missing
   esophageal_ulcer_bleed:
     description: The yes/no indicator used to describe if there were signs of recent
       bleeding from the esophageal ulcer or erosion.
@@ -312,6 +323,7 @@ properties:
     - 'Yes'
     - 'No'
     - Not Reported
+    - Missing
   gastric_ulcer_size:
     description: The text term used to describe the gastric ulcer or erosion size.
     enum:
@@ -319,6 +331,7 @@ properties:
     - Medium
     - Large
     - Not Reported
+    - Missing
   gastric_ulcer_bleed:
     description: The yes/no indicator used to describe if there were signs of recent
       bleeding from the gastric ulcer or erosion.
@@ -326,6 +339,7 @@ properties:
     - 'Yes'
     - 'No'
     - Not Reported
+    - Missing
   duodenum_ulcer_size:
     description: The text term used to describe the duodenal ulcer or erosion size.
     enum:
@@ -333,6 +347,7 @@ properties:
     - Medium
     - Large
     - Not Reported
+    - Missing
   duodenum_ulcer_bleed:
     description: The yes/no indicator used to describe if there were signs of recent
       bleeding from the duodenal ulcer or erosion.
@@ -340,6 +355,7 @@ properties:
     - 'Yes'
     - 'No'
     - Not Reported
+    - Missing
   fibroscan:
     description: The yes/no indicator used to describe if a fibroscan was done as
       a standard care of procedure.
@@ -501,6 +517,7 @@ properties:
     - 'Yes'
     - 'No'
     - Not Reported
+    - Missing
   hep_enceph_diagnosis_date:
     description: Date of most recent Spontaneous Hepatic Encephalopathy diagnosis  (grade
       2 or higher). In (YYYY-MM-DD) format.
@@ -513,6 +530,7 @@ properties:
     - 'Yes'
     - 'No'
     - Not Reported
+    - Missing
   varices_diagnosis_date:
     description: Date of most recent diagnosis of moderate/large varices or bleeding  from
       varices. In (YYYY-MM-DD) format.
@@ -525,6 +543,7 @@ properties:
     - 'Yes'
     - 'No'
     - Not Reported
+    - Missing
   hepcar_diagnosis_date:
     description: Date of most recent diagnosis of Hepatocellular Carcinoma (HCC).
       In (YYYY-MM-DD) format.
@@ -537,6 +556,7 @@ properties:
     - 'Yes'
     - 'No'
     - Not Reported
+    - Missing
   liver_transplant_date:
     description: The date of liver transplant. In (YYYY-MM-DD) format.
     type:

@@ -63,10 +63,10 @@ properties:
   sex:
     description: Sex of patient at birth.
     enum:
-    - M
-    - F
-    - U
-    - UNDIFFERENTIATED
+    - male
+    - female
+    - unknown
+    - unspecified
   gender:
     description: 'Text designations that identify gender. Gender is described as the
       assemblage of properties that distinguish people on the basis of their societal
@@ -101,18 +101,8 @@ properties:
   education:
     description: Text term to identify the highest level of education complete for
       the patient.
-    enum:
-    - Bachelor's Degree
-    - Data not available
-    - Doctoral degree or professional degree
-    - Grade School
-    - Graduate or professional degree
-    - High school graduate (including equivalency)
-    - Master's Degree
-    - No formal education
-    - Not high school graduate
-    - Some college or associate degree
-    - Some training after high school
+    type:
+    - string
   marital:
     description: What is your current marital status?
     enum:
@@ -122,6 +112,9 @@ properties:
     - Never Married
     - Separated
     - Widowed
+    - Missing
+    - Living with significant other (common law marriage)
+    - Single, never married
   cur_employ_stat:
     description: The indicator to ask if the patient is currently employed.
     enum:
@@ -160,32 +153,12 @@ properties:
     - number
   cause_of_death_primary:
     description: Text term to identify the primary cause of death for a patient.
-    enum:
-    - Cardiovascular Disorder
-    - NOS
-    - End-stage Renal Disease
-    - Infection
-    - Not Cancer Related
-    - Not Reported
-    - Kidney Disease
-    - Spinal Muscular Atrophy
-    - Surgical Complications
-    - Toxicity
-    - Unknown
+    type:
+    - string
   cause_of_death_secondary:
     description: Text term to identify the secondary cause of death for a patient.
-    enum:
-    - Cardiovascular Disorder
-    - NOS
-    - End-stage Renal Disease
-    - Infection
-    - Not Cancer Related
-    - Not Reported
-    - Kidney Disease
-    - Spinal Muscular Atrophy
-    - Surgical Complications
-    - Toxicity
-    - Unknown
+    type:
+    - string
   death_related_to:
     description: Text term to identify common conditions to which the death is related.
     enum:

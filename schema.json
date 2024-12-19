@@ -2314,8 +2314,8 @@
     },
     "_settings.yaml": {
         "enable_case_cache": false,
-        "_dict_commit": "820d2e6fadb001750ecc823e0847f0bc0c9c4f89",
-        "_dict_version": "3.0.1-updated-clinical-test"
+        "_dict_commit": "ab6f5e8bd3a872deb2c8bafb7492c366652f44a1",
+        "_dict_version": "IUDCC_data_release_data_model_v2.0.0"
     },
     "slide_count.yaml": {
         "$schema": "http://json-schema.org/draft-04/schema#",
@@ -3814,10 +3814,10 @@
             "sex": {
                 "description": "Sex of patient at birth.",
                 "enum": [
-                    "M",
-                    "F",
-                    "U",
-                    "UNDIFFERENTIATED"
+                    "male",
+                    "female",
+                    "unknown",
+                    "unspecified"
                 ]
             },
             "gender": {
@@ -3849,18 +3849,8 @@
             },
             "education": {
                 "description": "Text term to identify the highest level of education complete for the patient.",
-                "enum": [
-                    "Bachelor's Degree",
-                    "Data not available",
-                    "Doctoral degree or professional degree",
-                    "Grade School",
-                    "Graduate or professional degree",
-                    "High school graduate (including equivalency)",
-                    "Master's Degree",
-                    "No formal education",
-                    "Not high school graduate",
-                    "Some college or associate degree",
-                    "Some training after high school"
+                "type": [
+                    "string"
                 ]
             },
             "marital": {
@@ -3871,7 +3861,10 @@
                     "Married",
                     "Never Married",
                     "Separated",
-                    "Widowed"
+                    "Widowed",
+                    "Missing",
+                    "Living with significant other (common law marriage)",
+                    "Single, never married"
                 ]
             },
             "cur_employ_stat": {
@@ -3921,34 +3914,14 @@
             },
             "cause_of_death_primary": {
                 "description": "Text term to identify the primary cause of death for a patient.",
-                "enum": [
-                    "Cardiovascular Disorder",
-                    "NOS",
-                    "End-stage Renal Disease",
-                    "Infection",
-                    "Not Cancer Related",
-                    "Not Reported",
-                    "Kidney Disease",
-                    "Spinal Muscular Atrophy",
-                    "Surgical Complications",
-                    "Toxicity",
-                    "Unknown"
+                "type": [
+                    "string"
                 ]
             },
             "cause_of_death_secondary": {
                 "description": "Text term to identify the secondary cause of death for a patient.",
-                "enum": [
-                    "Cardiovascular Disorder",
-                    "NOS",
-                    "End-stage Renal Disease",
-                    "Infection",
-                    "Not Cancer Related",
-                    "Not Reported",
-                    "Kidney Disease",
-                    "Spinal Muscular Atrophy",
-                    "Surgical Complications",
-                    "Toxicity",
-                    "Unknown"
+                "type": [
+                    "string"
                 ]
             },
             "death_related_to": {
@@ -11269,8 +11242,7 @@
                     "90",
                     "180",
                     "84",
-                    "168",
-                    "TEST!!!!!"
+                    "168"
                 ]
             },
             "cdc_hiv_risk_factors": {
@@ -11354,14 +11326,17 @@
                 "description": "The yes/no indicator used to describe if a urine culture test was done.",
                 "enum": [
                     "Yes",
-                    "No"
+                    "No",
+                    "Missing",
+                    "Not Done"
                 ]
             },
             "urine_culture_result": {
                 "description": "The text term used to describe the results of the urine culture test.",
                 "enum": [
                     "Positive",
-                    "Negative"
+                    "Negative",
+                    "Missing"
                 ]
             },
             "urine_culture_organism": {
@@ -11390,14 +11365,17 @@
                 "enum": [
                     "Yes",
                     "No",
-                    "Not Reported"
+                    "Not Reported",
+                    "Not Done",
+                    "Missing"
                 ]
             },
             "ascites_culture_result": {
                 "description": "The text used to describe the results of the ascites culture test.",
                 "enum": [
                     "Positive",
-                    "Negative"
+                    "Negative",
+                    "Missing"
                 ]
             },
             "ascites_organism": {
@@ -11497,7 +11475,8 @@
                     "Small",
                     "Medium",
                     "Large",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "esophageal_varices_bleed": {
@@ -11505,7 +11484,8 @@
                 "enum": [
                     "Yes",
                     "No",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "gastric_varices_size": {
@@ -11514,7 +11494,8 @@
                     "Small",
                     "Medium",
                     "Large",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "gastric_varices_bleed": {
@@ -11522,7 +11503,8 @@
                 "enum": [
                     "Yes",
                     "No",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "portal_hypertensive_gastropathy": {
@@ -11533,7 +11515,8 @@
                     "Yes, Severe",
                     "Yes, Unknown severity",
                     "None",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "endoscopy_ulcer_present": {
@@ -11555,7 +11538,8 @@
                     "Small",
                     "Medium",
                     "Large",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "esophageal_ulcer_bleed": {
@@ -11563,7 +11547,8 @@
                 "enum": [
                     "Yes",
                     "No",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "gastric_ulcer_size": {
@@ -11572,7 +11557,8 @@
                     "Small",
                     "Medium",
                     "Large",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "gastric_ulcer_bleed": {
@@ -11580,7 +11566,8 @@
                 "enum": [
                     "Yes",
                     "No",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "duodenum_ulcer_size": {
@@ -11589,7 +11576,8 @@
                     "Small",
                     "Medium",
                     "Large",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "duodenum_ulcer_bleed": {
@@ -11597,7 +11585,8 @@
                 "enum": [
                     "Yes",
                     "No",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "fibroscan": {
@@ -11809,7 +11798,8 @@
                 "enum": [
                     "Yes",
                     "No",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "hep_enceph_diagnosis_date": {
@@ -11823,7 +11813,8 @@
                 "enum": [
                     "Yes",
                     "No",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "varices_diagnosis_date": {
@@ -11837,7 +11828,8 @@
                 "enum": [
                     "Yes",
                     "No",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "hepcar_diagnosis_date": {
@@ -11851,7 +11843,8 @@
                 "enum": [
                     "Yes",
                     "No",
-                    "Not Reported"
+                    "Not Reported",
+                    "Missing"
                 ]
             },
             "liver_transplant_date": {
