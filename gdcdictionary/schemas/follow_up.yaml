@@ -56,6 +56,11 @@ properties:
     type:
     - number
     - 'null'
+  event_type:
+    description: Event type for a follow up visit.
+    type:
+    - string
+    - 'null'
   visit_day:
     description: Number of days between the baseline and when the visit is scheduled
       according to the protocol. Equivalent to the visit.
