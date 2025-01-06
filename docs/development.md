@@ -91,7 +91,7 @@ git merge develop
 ```
 Repeat steps 4-6 above in order to create a new tagged version of the `schema.json` file for final testing. The naming convention for the tag should be something like: `2.1.0-rc1`. When you push the tagged schema file in step 6 it will become available for final testing in staging and other environments.
 
-When testing is complete, merge your changes into the `main` branch. Because the main branch is protected, you will need to create a pull request and have it reviewed by a team member. This process is most easily accomplished using the GitHub web interface or the GitHub desktop application.
+When testing is complete, merge your changes into the `main` branch. Because the main branch is protected, you will need to create a pull request and have it reviewed by a team member. This process is most easily accomplished using the GitHub web interface or the GitHub desktop application. After the PR is closed and the changes are merged, you can (and should) remove the release branch. The Github web UI should prompt for this when completing the merge.
 
 ## Step 8: Create a release
 After your changes have been merged into the `main` branch, create a new release. This will tag the release with a version number and make it available for deployment in a Gen3 environment.
