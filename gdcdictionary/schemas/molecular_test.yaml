@@ -943,6 +943,8 @@ properties:
     - Urine KIM-1
     - Urine L-FABP
     - Urine NGAL
+    - ORM1
+    - AhR Activity
   test_value:
     description: The text term or numeric value used to describe a sepcific result
       of a molecular test.
