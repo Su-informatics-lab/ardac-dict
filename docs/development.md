@@ -69,6 +69,7 @@ When you are satisfied with your changes and have tested them in a Gen3 environm
 ```bash
 git checkout develop
 git merge feat/new-file-type
+git push
 ```
 
 At this point you should most likely delete both the local and remote copies of your feature branch:
