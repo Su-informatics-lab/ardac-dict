@@ -47,6 +47,11 @@ properties:
   study_name:
     type:
     - string
+  study_type:
+    description: The type of the study, observational or clinical
+    enum:
+    - obs
+    - clinical
   data_description:
     description: Brief description of the data being provided for this study. Free
       text.
