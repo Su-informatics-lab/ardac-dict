@@ -3103,7 +3103,7 @@
     "_settings.yaml": {
         "enable_case_cache": false,
         "_dict_commit": "08707a2928ec17daeb7d2f4ed676108934a7bda8",
-        "_dict_version": "2.1.1-3-g08707a2"
+        "_dict_version": "2.2.1"
     },
     "read_group.yaml": {
         "$schema": "http://json-schema.org/draft-04/schema#",
