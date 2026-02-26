@@ -70,11 +70,13 @@ properties:
     - '7'
     - '14'
     - '28'
+    - '30'
     - '60'
-    - '90'
-    - '180'
     - '84'
+    - '90'
     - '168'
+    - '180'
+    - '365'
   cdc_hiv_risk_factors:
     description: The text term used to describe a risk factor for human immunodeficiency
       virus, as described by the Center for Disease Control.
