@@ -69,6 +69,7 @@ When you are satisfied with your changes and have tested them in a Gen3 environm
 ```bash
 git checkout develop
 git merge feat/new-file-type
+git push
 ```
 
 At this point you should most likely delete both the local and remote copies of your feature branch:
@@ -89,9 +90,18 @@ git checkout main
 git checkout -b release/2.1.0
 git merge develop
 ```
-Repeat steps 4-6 above in order to create a new tagged version of the `schema.json` file for final testing. The naming convention for the tag should be something like: `2.1.0-rc1`. When you push the tagged schema file in step 6 it will become available for final testing in staging and other environments.
-
-When testing is complete, merge your changes into the `main` branch. Because the main branch is protected, you will need to create a pull request and have it reviewed by a team member. This process is most easily accomplished using the GitHub web interface or the GitHub desktop application. After the PR is closed and the changes are merged, you can (and should) remove the release branch. The Github web UI should prompt for this when completing the merge.
+Now add what will be the final tag for this release (e.g. 2.1.0) and re-run the validation in order to generate a new schema.json with the tag:
+```bash
+git tag 2.1.0
+docker run --rm -v $(pwd):/mnt/host quay.io/rds/dictutils
+```
+Now you are ready to commit and push your changes to the release branch:
+```bash
+git add .
+git commit -m "Release 2.1.0"
+git push origin release/2.1.0
+```
+You should now be ready to merge your changes into the `main` branch. Because the main branch is protected, you will need to create a pull request and have it reviewed by a team member. This process is most easily accomplished using the GitHub web interface or the GitHub desktop application. After the PR is closed and the changes are merged, you can (and should) remove the release branch. The Github web UI should prompt for this when completing the merge.
 
 ## Step 8: Create a release
 After your changes have been merged into the `main` branch, create a new release. This will tag the release with a version number and make it available for deployment in a Gen3 environment.

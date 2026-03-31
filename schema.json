@@ -221,8 +221,8 @@
     },
     "_settings.yaml": {
         "enable_case_cache": false,
-        "_dict_commit": "f873d07014cbc4eda0e6cabfb3f00e19fe4e047c",
-        "_dict_version": "2.1.1"
+        "_dict_commit": "049916568851042f8e86ed536435b50741085573",
+        "_dict_version": "2.2.2"
     },
     "treatment.yaml": {
         "$schema": "http://json-schema.org/draft-04/schema#",
@@ -5989,7 +5989,7 @@
                 ]
             },
             "actarm": {
-                "description": "Description of actual Arm. When an Arm is not planned, ACTARM will be \u201cUnplanned Treatment\u201d. Randomized subjects who were not treated will be given a value of \u201cNot Treated\u201d. Values should be \u201cScreen Failure\u201d for screen failures and \u201cNot Assigned\u201d for subjects not assigned to treatment. Restricted to values in Trial Arms in all other cases.",
+                "description": "Description of actual Arm. Randomized subjects who were not treated will be given a value of \u201cNot Treated\u201d. Restricted to values in  Trial Arms in all other cases.",
                 "enum": [
                     "Prednisone",
                     "Anakinra + Zinc",
@@ -7523,6 +7523,13 @@
                     "string"
                 ]
             },
+            "study_type": {
+                "description": "The type of the study, observational or clinical",
+                "enum": [
+                    "obs",
+                    "clinical"
+                ]
+            },
             "data_description": {
                 "description": "Brief description of the data being provided for this study. Free text.",
                 "type": [
@@ -7732,11 +7739,13 @@
                     "7",
                     "14",
                     "28",
+                    "30",
                     "60",
-                    "90",
-                    "180",
                     "84",
-                    "168"
+                    "90",
+                    "168",
+                    "180",
+                    "365"
                 ]
             },
             "cdc_hiv_risk_factors": {
