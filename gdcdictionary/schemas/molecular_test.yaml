@@ -945,6 +945,7 @@ properties:
     - Urine NGAL
     - ORM1
     - AhR Activity
+    - IL-1RA
   test_value:
     description: The text term or numeric value used to describe a sepcific result
       of a molecular test.
