@@ -4,10 +4,10 @@ This document explains how to set up the automated deployment pipeline for ARDaC
 
 ## Deployment Overview
 
-The deployment workflow is triggered automatically when a new semantic version tag (e.g., `v1.2.3`) is pushed to the repository. The workflow performs the following steps:
+The deployment workflow is triggered automatically when a new semantic version tag (e.g., `1.2.3`) is pushed to the repository. The workflow performs the following steps:
 1. Checks out the code for the tagged release.
 2. Configures AWS credentials using GitHub Secrets.
-3. Uploads the `schema.json` file to the configured S3 bucket under a directory named after the release tag (e.g., `s3://my-bucket/v1.2.3/schema.json`).
+3. Uploads the `schema.json` file to the configured S3 bucket under a directory named after the release tag (e.g., `s3://my-bucket/1.2.3/schema.json`).
 
 ## Prerequisites
 
@@ -107,8 +107,8 @@ The four secrets expected by the workflow are:
 To trigger a deployment, simply create and push a new tag:
 
 ```bash
-git tag v1.2.3
-git push origin v1.2.3
+git tag 1.2.3
+git push origin 1.2.3
 ```
 
 The workflow will run automatically. You can monitor its progress in the **Actions** tab of the repository.
