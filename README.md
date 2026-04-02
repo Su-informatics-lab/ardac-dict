@@ -8,3 +8,5 @@ Deployable versions of the ARDaC data dictionary are available at https://dictio
 To recreate a version of the dictionary, check out the appropriate tag and use the Gen3 [dictionaryutils](https://github.com/uc-cdis/dictionaryutils) to create a JSON file that can be deployed in Gen3.
 
 For step-by-step instructions on how to make changes to the dictionary, please see the `development` guide in the `DOCS` folder.
+
+For instructions on setting up automated deployments to S3, please see the [deployment guide](docs/deployment.md).
