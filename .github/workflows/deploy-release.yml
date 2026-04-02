@@ -3,10 +3,9 @@ name: Deploy Release to S3
 on:
   push:
     tags:
-      - '*.*.*'   # Semantic version tags (e.g., v1.2.3)
+      - 'v[0-9]+.[0-9]+.[0-9]+'   # Release tags only (e.g., v1.2.3) — excludes dev/pre-release tags
 
 permissions:
-  id-token: write   # This is required for requesting the JWT
   contents: read    # This is required for actions/checkout
 
 jobs:
