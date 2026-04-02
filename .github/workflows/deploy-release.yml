@@ -3,7 +3,7 @@ name: Deploy Release to S3
 on:
   push:
     tags:
-      - '[0-9]+.[0-9]+.[0-9]+'   # Release tags only (e.g., v1.2.3) — excludes dev/pre-release tags
+      - '[0-9]+.[0-9]+.[0-9]+'   # Release tags only (e.g., 1.2.3) — excludes dev/pre-release tags
 
 permissions:
   contents: read    # This is required for actions/checkout
