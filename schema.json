@@ -221,8 +221,8 @@
     },
     "_settings.yaml": {
         "enable_case_cache": false,
-        "_dict_commit": "ea88151660d32cd4e7950eaa4496924758f4e5d1",
-        "_dict_version": "2.2.3"
+        "_dict_commit": "ac64238dbb1d0c5226adba3a2e56e453c69892a2",
+        "_dict_version": "2.3.0-experimental-metadata-update"
     },
     "treatment.yaml": {
         "$schema": "http://json-schema.org/draft-04/schema#",
@@ -1125,7 +1125,7 @@
         "category": "metadata_file",
         "project": "*",
         "program": "*",
-        "description": "Data file containing the metadata for the experiment performed.\n",
+        "description": "Data file containing the metadata for the experiment performed, or processed quantification data (e.g. proteomics) produced by a lab.\n",
         "additionalProperties": false,
         "submittable": true,
         "validators": null,
@@ -1157,6 +1157,14 @@
                         "label": "derived_from",
                         "target_type": "experiment",
                         "multiplicity": "many_to_many",
+                        "required": false
+                    },
+                    {
+                        "name": "labs",
+                        "backref": "experiment_metadata_files",
+                        "label": "produced_by",
+                        "target_type": "lab",
+                        "multiplicity": "many_to_one",
                         "required": false
                     }
                 ]
@@ -1201,7 +1209,8 @@
                     "$ref": "_terms.yaml#/data_type"
                 },
                 "enum": [
-                    "Experimental Metadata"
+                    "Experimental Metadata",
+                    "Proteomics Quantification"
                 ]
             },
             "data_format": {
@@ -1212,11 +1221,51 @@
                     "string"
                 ]
             },
+            "experimental_strategy": {
+                "term": {
+                    "$ref": "_terms.yaml#/experimental_strategy"
+                },
+                "description": "The experimental strategy used to generate the data file.",
+                "enum": [
+                    "LC-MS/MS",
+                    "TMT",
+                    "Label-Free",
+                    "DIA",
+                    "DDA",
+                    "SWATH"
+                ]
+            },
+            "measurement_type": {
+                "description": "The type of quantification measurement in the data file.",
+                "enum": [
+                    "pep",
+                    "Quantity",
+                    "Spectral_Count",
+                    "iBAQ"
+                ]
+            },
+            "instrument_model": {
+                "description": "The model of mass spectrometry instrument used (e.g. Orbitrap Exploris 480).",
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "software_version": {
+                "description": "The software and version used for data processing (e.g. MaxQuant 2.1.0).",
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
             "experiments": {
                 "$ref": "_definitions.yaml#/to_one"
             },
             "core_metadata_collections": {
                 "$ref": "_definitions.yaml#/to_many"
+            },
+            "labs": {
+                "$ref": "_definitions.yaml#/to_one"
             }
         }
     },
