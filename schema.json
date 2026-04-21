@@ -1259,7 +1259,7 @@
                 ]
             },
             "experiments": {
-                "$ref": "_definitions.yaml#/to_one"
+                "$ref": "_definitions.yaml#/to_many"
             },
             "core_metadata_collections": {
                 "$ref": "_definitions.yaml#/to_many"
