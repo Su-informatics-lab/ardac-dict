@@ -6,7 +6,8 @@ namespace: http://gdc.nci.nih.gov
 category: metadata_file
 project: '*'
 program: '*'
-description: 'Data file containing the metadata for the experiment performed.
+description: 'Data file containing the metadata for the experiment performed, or
+  processed quantification data (e.g. proteomics) produced by a lab.
 
   '
 additionalProperties: false
@@ -36,6 +37,12 @@ links:
     target_type: experiment
     multiplicity: many_to_many
     required: false
+  - name: labs
+    backref: experiment_metadata_files
+    label: produced_by
+    target_type: lab
+    multiplicity: many_to_one
+    required: false
 required:
 - submitter_id
 - type
@@ -64,12 +71,45 @@ properties:
       $ref: _terms.yaml#/data_type
     enum:
     - Experimental Metadata
+    - Proteomics Quantification
   data_format:
     term:
       $ref: _terms.yaml#/data_format
     type:
     - string
+  experimental_strategy:
+    term:
+      $ref: _terms.yaml#/experimental_strategy
+    description: The experimental strategy used to generate the data file.
+    enum:
+    - LC-MS/MS
+    - TMT
+    - Label-Free
+    - DIA
+    - DDA
+    - SWATH
+  measurement_type:
+    description: The type of quantification measurement in the data file.
+    enum:
+    - pep
+    - Quantity
+    - Spectral_Count
+    - iBAQ
+  instrument_model:
+    description: The model of mass spectrometry instrument used (e.g. Orbitrap Exploris
+      480).
+    type:
+    - string
+    - 'null'
+  software_version:
+    description: The software and version used for data processing (e.g. MaxQuant
+      2.1.0).
+    type:
+    - string
+    - 'null'
   experiments:
-    $ref: _definitions.yaml#/to_one
+    $ref: _definitions.yaml#/to_many
   core_metadata_collections:
     $ref: _definitions.yaml#/to_many
+  labs:
+    $ref: _definitions.yaml#/to_one
