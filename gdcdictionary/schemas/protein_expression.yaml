@@ -9,14 +9,16 @@ program: '*'
 description: Data file containing proteomics data.
 additionalProperties: false
 submittable: true
+downloadable: true
+previous_version_downloadable: true
 validators: null
 systemProperties:
 - id
 - project_id
 - created_datetime
 - updated_datetime
-- file_state
 - state
+- file_state
 - error_type
 links:
 - exclusive: false
@@ -41,14 +43,17 @@ required:
 - file_size
 - md5sum
 - data_category
-- data_format
 - data_type
+- data_format
 uniqueKeys:
 - - id
 - - project_id
   - submitter_id
 properties:
   $ref: _definitions.yaml#/data_file_properties
+  type:
+    enum:
+    - protein_expression
   data_category:
     term:
       $ref: _terms.yaml#/data_category
@@ -67,6 +72,7 @@ properties:
   experimental_strategy:
     term:
       $ref: _terms.yaml#/experimental_strategy
+    description: The experimental strategy used to generate the data file.
     enum:
     - Reverse Phase Protein Array
     - LC-MS/MS

@@ -221,8 +221,8 @@
     },
     "_settings.yaml": {
         "enable_case_cache": false,
-        "_dict_commit": "42998b09353dffbe78f8edb75a8a23d55e3cd9d8",
-        "_dict_version": "2.4.0-protein-expression"
+        "_dict_commit": "10de04adee6e32dd96aa53ccbebebc045a9a6328",
+        "_dict_version": "2.4.0"
     },
     "treatment.yaml": {
         "$schema": "http://json-schema.org/draft-04/schema#",
@@ -9485,14 +9485,16 @@
         "description": "Data file containing proteomics data.",
         "additionalProperties": false,
         "submittable": true,
+        "downloadable": true,
+        "previous_version_downloadable": true,
         "validators": null,
         "systemProperties": [
             "id",
             "project_id",
             "created_datetime",
             "updated_datetime",
-            "file_state",
             "state",
+            "file_state",
             "error_type"
         ],
         "links": [
@@ -9526,8 +9528,8 @@
             "file_size",
             "md5sum",
             "data_category",
-            "data_format",
-            "data_type"
+            "data_type",
+            "data_format"
         ],
         "uniqueKeys": [
             [
@@ -9540,6 +9542,11 @@
         ],
         "properties": {
             "$ref": "_definitions.yaml#/data_file_properties",
+            "type": {
+                "enum": [
+                    "protein_expression"
+                ]
+            },
             "data_category": {
                 "term": {
                     "$ref": "_terms.yaml#/data_category"
@@ -9568,6 +9575,7 @@
                 "term": {
                     "$ref": "_terms.yaml#/experimental_strategy"
                 },
+                "description": "The experimental strategy used to generate the data file.",
                 "enum": [
                     "Reverse Phase Protein Array",
                     "LC-MS/MS",
