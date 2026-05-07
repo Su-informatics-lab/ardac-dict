@@ -6,7 +6,9 @@ namespace: https://gdc.cancer.gov
 category: data_file
 project: '*'
 program: '*'
-description: Data file containing proteomics data.
+description: 'Data file containing proteomics data.
+
+  '
 additionalProperties: false
 submittable: true
 downloadable: true

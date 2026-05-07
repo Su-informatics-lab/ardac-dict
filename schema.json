@@ -221,8 +221,8 @@
     },
     "_settings.yaml": {
         "enable_case_cache": false,
-        "_dict_commit": "10de04adee6e32dd96aa53ccbebebc045a9a6328",
-        "_dict_version": "2.4.0"
+        "_dict_commit": "7a9a691b991649776dc0506f2aa6473996b55e9a",
+        "_dict_version": "2.4.0-1-g7a9a691"
     },
     "treatment.yaml": {
         "$schema": "http://json-schema.org/draft-04/schema#",
@@ -9482,7 +9482,7 @@
         "category": "data_file",
         "project": "*",
         "program": "*",
-        "description": "Data file containing proteomics data.",
+        "description": "Data file containing proteomics data.\n",
         "additionalProperties": false,
         "submittable": true,
         "downloadable": true,
