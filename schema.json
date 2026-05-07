@@ -221,8 +221,8 @@
     },
     "_settings.yaml": {
         "enable_case_cache": false,
-        "_dict_commit": "532d400b30135a1489ca354f4a018700529e0f95",
-        "_dict_version": "2.4.0-1-g532d400"
+        "_dict_commit": "64dca069dcf407582b3b6af5cd2f08479ee432fc",
+        "_dict_version": "2.4.0"
     },
     "treatment.yaml": {
         "$schema": "http://json-schema.org/draft-04/schema#",
