@@ -221,8 +221,8 @@
     },
     "_settings.yaml": {
         "enable_case_cache": false,
-        "_dict_commit": "8e1d88b566153981597965e8d826adef95080271",
-        "_dict_version": "2.3.0"
+        "_dict_commit": "532d400b30135a1489ca354f4a018700529e0f95",
+        "_dict_version": "2.4.0-1-g532d400"
     },
     "treatment.yaml": {
         "$schema": "http://json-schema.org/draft-04/schema#",
@@ -9470,6 +9470,159 @@
             },
             "submitted_aligned_reads_files": {
                 "$ref": "_definitions.yaml#/to_many"
+            }
+        }
+    },
+    "protein_expression.yaml": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "protein_expression",
+        "title": "Protein Expression",
+        "type": "object",
+        "namespace": "https://gdc.cancer.gov",
+        "category": "data_file",
+        "project": "*",
+        "program": "*",
+        "description": "Data file containing proteomics data.\n",
+        "additionalProperties": false,
+        "submittable": true,
+        "downloadable": true,
+        "previous_version_downloadable": true,
+        "validators": null,
+        "systemProperties": [
+            "id",
+            "project_id",
+            "created_datetime",
+            "updated_datetime",
+            "state",
+            "file_state",
+            "error_type"
+        ],
+        "links": [
+            {
+                "exclusive": false,
+                "required": true,
+                "subgroup": [
+                    {
+                        "name": "core_metadata_collections",
+                        "backref": "protein_expressions",
+                        "label": "data_from",
+                        "target_type": "core_metadata_collection",
+                        "multiplicity": "many_to_many",
+                        "required": false
+                    },
+                    {
+                        "name": "labs",
+                        "backref": "protein_expressions",
+                        "label": "produced_by",
+                        "target_type": "lab",
+                        "multiplicity": "many_to_one",
+                        "required": false
+                    }
+                ]
+            }
+        ],
+        "required": [
+            "submitter_id",
+            "type",
+            "file_name",
+            "file_size",
+            "md5sum",
+            "data_category",
+            "data_type",
+            "data_format"
+        ],
+        "uniqueKeys": [
+            [
+                "id"
+            ],
+            [
+                "project_id",
+                "submitter_id"
+            ]
+        ],
+        "properties": {
+            "$ref": "_definitions.yaml#/data_file_properties",
+            "type": {
+                "enum": [
+                    "protein_expression"
+                ]
+            },
+            "data_category": {
+                "term": {
+                    "$ref": "_terms.yaml#/data_category"
+                },
+                "type": [
+                    "string"
+                ]
+            },
+            "data_type": {
+                "term": {
+                    "$ref": "_terms.yaml#/data_type"
+                },
+                "type": [
+                    "string"
+                ]
+            },
+            "data_format": {
+                "term": {
+                    "$ref": "_terms.yaml#/data_format"
+                },
+                "type": [
+                    "string"
+                ]
+            },
+            "experimental_strategy": {
+                "term": {
+                    "$ref": "_terms.yaml#/experimental_strategy"
+                },
+                "description": "The experimental strategy used to generate the data file.",
+                "enum": [
+                    "Reverse Phase Protein Array",
+                    "LC-MS/MS",
+                    "TMT",
+                    "Label-Free",
+                    "DIA",
+                    "DDA",
+                    "SWATH"
+                ]
+            },
+            "platform": {
+                "term": {
+                    "$ref": "_terms.yaml#/platform"
+                },
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "measurement_type": {
+                "description": "The type of quantification measurement in the data file.",
+                "enum": [
+                    "pep",
+                    "Quantity",
+                    "Spectral_Count",
+                    "iBAQ"
+                ]
+            },
+            "instrument_model": {
+                "description": "The model of mass spectrometry instrument used (e.g. Orbitrap Exploris 480).",
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "software_version": {
+                "description": "The software and version used for data processing (e.g. MaxQuant 2.1.0).",
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "core_metadata_collections": {
+                "$ref": "_definitions.yaml#/to_many"
+            },
+            "labs": {
+                "$ref": "_definitions.yaml#/to_one"
             }
         }
     },
