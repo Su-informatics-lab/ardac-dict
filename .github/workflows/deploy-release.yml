@@ -19,9 +19,9 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::233907574649:role/github-actions-ardac-dict-deployer
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-ardac-dict-deployer
           aws-region: ${{ secrets.AWS_REGION }}
-          allowed-account-ids: 233907574649
+          allowed-account-ids: ${{ secrets.AWS_ACCOUNT_ID }}
           role-duration-seconds: 900
           role-session-name: GitHubActions-${{ github.run_id }}
 
