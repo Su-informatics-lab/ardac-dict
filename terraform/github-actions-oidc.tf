@@ -8,6 +8,8 @@ resource "aws_iam_openid_connect_provider" "github_actions" {
   ]
 }
 
+# This account-level provider is shared with alchepnet-website. That
+# repository discovers it as a data source and owns only its deployment IAM.
 data "aws_iam_policy_document" "github_actions_ardac_dict_assume_role" {
   statement {
     effect  = "Allow"
@@ -52,58 +54,18 @@ resource "aws_iam_role_policy" "github_actions_ardac_dict_deploy" {
   policy = data.aws_iam_policy_document.github_actions_ardac_dict_deploy.json
 }
 
-data "aws_iam_policy_document" "github_actions_alchepnet_website_assume_role" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRoleWithWebIdentity"]
+removed {
+  from = aws_iam_role.github_actions_alchepnet_website_deployer
 
-    principals {
-      type        = "Federated"
-      identifiers = [aws_iam_openid_connect_provider.github_actions.arn]
-    }
-
-    condition {
-      test     = "StringEquals"
-      variable = "token.actions.githubusercontent.com:aud"
-      values   = ["sts.amazonaws.com"]
-    }
-
-    condition {
-      test     = "StringEquals"
-      variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:Su-informatics-lab/alchepnet-website:ref:refs/heads/develop"]
-    }
+  lifecycle {
+    destroy = false
   }
 }
 
-resource "aws_iam_role" "github_actions_alchepnet_website_deployer" {
-  name               = "github-actions-alchepnet-website-deployer"
-  description        = "Deploys the alchepnet-website develop branch from GitHub Actions"
-  assume_role_policy = data.aws_iam_policy_document.github_actions_alchepnet_website_assume_role.json
-}
+removed {
+  from = aws_iam_role_policy.github_actions_alchepnet_website_deploy
 
-data "aws_iam_policy_document" "github_actions_alchepnet_website_deploy" {
-  statement {
-    effect    = "Allow"
-    actions   = ["s3:ListBucket"]
-    resources = ["arn:aws:s3:::test.alchepnet.org"]
+  lifecycle {
+    destroy = false
   }
-
-  statement {
-    effect    = "Allow"
-    actions   = ["s3:PutObject"]
-    resources = ["arn:aws:s3:::test.alchepnet.org/*"]
-  }
-
-  statement {
-    effect    = "Allow"
-    actions   = ["cloudfront:CreateInvalidation"]
-    resources = ["arn:aws:cloudfront::${var.account}:distribution/EAIFBVSW6O5UF"]
-  }
-}
-
-resource "aws_iam_role_policy" "github_actions_alchepnet_website_deploy" {
-  name   = "deploy-website"
-  role   = aws_iam_role.github_actions_alchepnet_website_deployer.id
-  policy = data.aws_iam_policy_document.github_actions_alchepnet_website_deploy.json
 }
