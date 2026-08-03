@@ -1,4 +1,6 @@
 terraform {
+  required_version = ">= 1.7.0"
+
   backend "s3" {
     key    = "ardac-dictionary/terraform.tfstate"
     region = "us-east-1"
