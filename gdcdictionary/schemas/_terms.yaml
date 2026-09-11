@@ -1912,3 +1912,513 @@ years_smoked:
     cde_id: 3137957
     cde_version: 1.0
     term_url: https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3137957&version=1.0
+abstract_text:
+  description: 'Abstract, with structured section labels preserved in order. PubMed element
+    AbstractText at MedlineCitation/Article/Abstract/AbstractText.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Abstract Text
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+acronym:
+  description: 'NIH institute acronym. PubMed element Acronym at MedlineCitation/Article/GrantList/Grant/Acronym.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Funding Institute Acronym
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+agency:
+  description: 'Funding agency per PubMed. PubMed element Agency at MedlineCitation/Article/GrantList/Grant/Agency.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Funding Agency
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+ardac_alchepnet_relevance:
+  description: 'AlcHepNet relevance of the publication. DEFINITION PENDING: awaiting Samer''s
+    confirmation of what the categories should mean, so every record is TBD for now. Metadata
+    only - not used to exclude publications, and it does not block the interim green-version
+    upload.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: AlcHepNet Relevance
+    term_url: null
+ardac_curation_status:
+  description: 'How far curation of this record has progressed, independent of whether it
+    is included.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: ARDaC Curation Status
+    term_url: null
+ardac_inclusion_status:
+  description: 'Whether the record is included in the ARDaC publication list. Separate from
+    PubMed status and from curation progress, so an inclusion decision is never confused with
+    a bibliographic fact.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: ARDaC Inclusion Status
+    term_url: null
+ardac_publication_type:
+  description: 'ARDaC coarse classification, kept separate from the PubMed list so the source
+    values are never overwritten. Derived from the PubMed types together with the agreed page
+    rule, then curated.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: ARDaC Publication Type
+    term_url: null
+article_date:
+  description: 'Electronic publication date. EndNote NIH style Epub Date. PubMed element ArticleDate
+    at MedlineCitation/Article/ArticleDate.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Electronic Publication Date
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+article_title:
+  description: 'Title of the article. PubMed element ArticleTitle at MedlineCitation/Article/ArticleTitle.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Article Title
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+author_list:
+  description: 'Ordered author list in NIH style, Surname Initials separated by commas. Flattened
+    to a single field for version 1; order is significant. Whether this should instead be
+    an array or a separate author node is open for Nanxin and Hao - see READ ME. PubMed element
+    AuthorList/Author at MedlineCitation/Article/AuthorList/Author.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Author List
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+citation_status:
+  description: 'Record status, for example MEDLINE, In-Process, Publisher. PubMed element
+    MedlineCitation/@Status at MedlineCitation/@Status.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: MEDLINE Citation Status
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+collective_name:
+  description: 'Consortium or group author, for example AlcHepNet Investigators. PubMed element
+    CollectiveName at MedlineCitation/Article/AuthorList/Author/CollectiveName.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Corporate Author Name
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+corresponding_author:
+  description: 'PROXY, not a PubMed designation. The PubMed DTD has NO corresponding-author
+    element; the only signal publishers supply is an email in the affiliation, conventionally
+    prefixed Electronic address. Populated for about a third of records only. Where present
+    it is the last-listed author about 78 percent of the time and the first-listed author
+    about 19 percent, so it should NOT be read as senior authorship. See corresponding_author_basis
+    for how each value was found. PubMed element AffiliationInfo/Affiliation at MedlineCitation/Article/AuthorList/Author/AffiliationInfo/Affiliation.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: derived from NLM PubMed DTD
+    term: Corresponding Author
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+corresponding_author_basis:
+  description: 'How corresponding_author was determined: Electronic address marker, plain
+    email in the affiliation, or blank when PubMed supplies neither.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: Corresponding Author Basis
+    term_url: null
+country:
+  description: 'Country of the funding agency. PubMed element Country at MedlineCitation/Article/GrantList/Grant/Country.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Funding Country
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+doi:
+  description: 'DOI, normalized by removing URL and doi: prefixes. Taken from the article''s
+    own ArticleIdList only; ReferenceList entries are excluded. PubMed element ArticleId[@IdType=doi]
+    at PubmedData/ArticleIdList/ArticleId[@IdType=doi].
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD / ISO 26324
+    term: Digital Object Identifier
+    term_url: https://www.doi.org/
+elocation_id:
+  description: 'Article number or electronic location for journals without page ranges. PubMed
+    element ELocationID at MedlineCitation/Article/ELocationID.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Electronic Location Identifier
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+first_author:
+  description: 'First-listed author in PubMed order. PubMed element AuthorList/Author[1] at
+    (first Author in order).
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: derived from NLM PubMed DTD
+    term: First Author
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+funding_evidence:
+  description: 'Whether funding came from PubMed, from manual confirmation, or is unavailable.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: Funding Evidence Basis
+    term_url: null
+grant_id:
+  description: 'Article-level award identifiers as the publisher reported them. Never populated
+    by inference from the network award roster. Whether this should be an array or a separate
+    grant node is open for Nanxin and Hao. PubMed element GrantID at MedlineCitation/Article/GrantList/Grant/GrantID.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Grant Identifier
+    term_url: https://reporter.nih.gov/
+issn:
+  description: 'Journal ISSN. PubMed element ISSN at MedlineCitation/Article/Journal/ISSN.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD / ISO 3297
+    term: International Standard Serial Number
+    term_url: https://portal.issn.org/
+issue:
+  description: 'Absent for ahead-of-print articles and journals that use article numbers.
+    PubMed element Issue at MedlineCitation/Article/Journal/JournalIssue/Issue.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Journal Issue
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+journal_title:
+  description: 'Full journal title. PubMed element Journal/Title at MedlineCitation/Article/Journal/Title.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD / NLM Catalog
+    term: Journal Title
+    term_url: https://www.ncbi.nlm.nih.gov/nlmcatalog/
+language:
+  description: 'Language codes, semicolon-delimited. PubMed element Language at MedlineCitation/Article/Language.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD / ISO 639-2
+    term: Publication Language
+    term_url: https://www.loc.gov/standards/iso639-2/
+last_author:
+  description: 'Last-listed author in PubMed order. No seniority is implied. PubMed element
+    AuthorList/Author[last] at (last non-collective Author).
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: derived from NLM PubMed DTD
+    term: Last Author
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+medline_ta:
+  description: 'NLM abbreviated journal title. This is the form NIH and AMA reference style
+    prints. PubMed element MedlineTA at MedlineCitation/MedlineJournalInfo/MedlineTA.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD / NLM Catalog
+    term: Journal Title Abbreviation
+    term_url: https://www.ncbi.nlm.nih.gov/nlmcatalog/
+mesh_descriptor_ui:
+  description: 'MeSH Unique Identifiers for the descriptors, for example Humans is D006801.
+    PubMed element DescriptorName/@UI at MedlineCitation/MeshHeadingList/MeshHeading/DescriptorName/@UI.
+
+    '
+  termDef:
+    cde_id: see value, e.g. D006801
+    cde_version: pubmed_250101
+    source: MeSH
+    term: MeSH Descriptor Unique Identifier
+    term_url: https://meshb.nlm.nih.gov/
+mesh_descriptors:
+  description: 'MeSH descriptors assigned by NLM indexers, semicolon-delimited. PubMed element
+    DescriptorName at MedlineCitation/MeshHeadingList/MeshHeading/DescriptorName.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: MeSH
+    term: MeSH Descriptor Name
+    term_url: https://meshb.nlm.nih.gov/
+nlm_unique_id:
+  description: 'Resolvable NLM Catalog identifier for the journal, rather than a title string
+    alone. PubMed element NlmUniqueID at MedlineCitation/MedlineJournalInfo/NlmUniqueID.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM Catalog
+    term: NLM Catalog Record Identifier
+    term_url: https://www.ncbi.nlm.nih.gov/nlmcatalog/
+pagination:
+  description: 'Page range. Falls back to ELocationID where a journal uses article numbers.
+    PubMed element Pagination/MedlinePgn at MedlineCitation/Article/Pagination/MedlinePgn.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Pagination
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+pmcid:
+  description: 'PubMed Central identifier, used for NIH public-access reporting. PubMed element
+    ArticleId[@IdType=pmc] at PubmedData/ArticleIdList/ArticleId[@IdType=pmc].
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: PubMed Central Identifier
+    term_url: https://pmc.ncbi.nlm.nih.gov/
+pmid:
+  description: 'PubMed identifier. EndNote NIH style Accession Number. PubMed element PMID
+    at MedlineCitation/PMID.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: PubMed Unique Identifier
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+pmid_version:
+  description: 'Version of the PubMed record at the time of retrieval. PubMed element PMID/@Version
+    at MedlineCitation/PMID/@Version.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: PubMed Identifier Version
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+pub_date:
+  description: 'Publication date at the precision PubMed supplies: YYYY, YYYY-MM or YYYY-MM-DD.
+    Deliberately a string, not a datetime: 64 percent of records would otherwise require an
+    invented month or day. PubMed element PubDate at MedlineCitation/Article/Journal/JournalIssue/PubDate.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Publication Date
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+publication_type_ui:
+  description: 'MeSH Unique Identifier for each publication type, for example Journal Article
+    is D016428. This is the PubMed analogue of an OMOP concept_id. PubMed element PublicationType/@UI
+    at MedlineCitation/Article/PublicationTypeList/PublicationType/@UI.
+
+    '
+  termDef:
+    cde_id: see value, e.g. D016428
+    cde_version: pubmed_250101
+    source: MeSH
+    term: Publication Type MeSH Unique Identifier
+    term_url: https://meshb.nlm.nih.gov/
+publication_year:
+  description: 'Four-digit year, held separately from pub_date for straightforward reporting.
+    PubMed element PubDate/Year at MedlineCitation/Article/Journal/JournalIssue/PubDate/Year.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: derived from NLM PubMed DTD
+    term: Publication Year
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+pubmed_match_status:
+  description: 'Which identifier-resolution path produced this record''s PubMed match, so
+    nothing is silently fuzzy-matched.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: PubMed Match Status
+    term_url: null
+pubmed_publication_status:
+  description: 'PubMed''s own publication status, verbatim. No local values are added here;
+    ARDaC decisions live in ardac_inclusion_status. PubMed element PublicationStatus at PubmedData/PublicationStatus.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Publication Status
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
+pubmed_publication_types:
+  description: 'The ORIGINAL, potentially multi-valued PubMed publication type list, preserved
+    verbatim and semicolon-delimited, for example Journal Article; Multicenter Study; Observational
+    Study. The element name has no identifier, but each VALUE carries a MeSH Unique Identifier
+    - see publication_type_ui. PubMed element PublicationType at MedlineCitation/Article/PublicationTypeList/PublicationType.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD; values from MeSH
+    term: Publication Type
+    term_url: https://meshb.nlm.nih.gov/
+pubmed_retrieval_date:
+  description: 'Timestamp of the EFetch call.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: PubMed Retrieval Date
+    term_url: null
+record_hash:
+  description: 'Hash of the exact PubMed XML this record was built from, for provenance.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: Source Record Hash
+    term_url: null
+source_list:
+  description: 'Which source bibliography supplied the record.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: Source List
+    term_url: null
+source_record_id:
+  description: 'Stable per-row identifier for audit.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC local extension
+    term: Source Record Identifier
+    term_url: null
+submitter_id:
+  description: 'Node key required by Gen3; not a bibliographic identifier. Constructed deterministically
+    as PMID_<pmid> where a PMID exists, else DOI_<normalized doi>, else AHNPUB_<hash>, so
+    the identifier basis is explicit.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: null
+    source: ARDaC / Gen3
+    term: Submitter Identifier
+    term_url: null
+url:
+  description: 'Resolvable PubMed URL.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: derived
+    term: Publication URL
+    term_url: null
+volume:
+  description: 'String rather than integer: PubMed emits non-numeric volumes. PubMed element
+    Volume at MedlineCitation/Article/Journal/JournalIssue/Volume.
+
+    '
+  termDef:
+    cde_id: null
+    cde_version: pubmed_250101
+    source: NLM PubMed DTD
+    term: Journal Volume
+    term_url: https://dtd.nlm.nih.gov/ncbi/pubmed/doc/out/250101/index.html
