@@ -1,58 +1,280 @@
-$schema: http://json-schema.org/draft-04/schema#
-id: publication
+$schema: 'http://json-schema.org/draft-04/schema#'
+
+id: 'publication'
 title: Publication
 type: object
 namespace: http://gdc.nci.nih.gov
 category: administrative
 program: '*'
 project: '*'
-description: Publication for a project.
+description: >
+  Publication associated with a project or study. Bibliographic properties are
+  PubMed/MEDLINE data elements; see _terms.yaml for the element name, the NLM
+  DTD release that fixes it, and a citable reference. PubMed values and ARDaC
+  decisions are held in separate properties.
 additionalProperties: false
 submittable: true
 validators: null
+
 systemProperties:
-- id
-- project_id
-- state
-- created_datetime
-- updated_datetime
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
 links:
-- name: projects
-  backref: publications
-  label: refers_to
-  target_type: project
-  multiplicity: many_to_many
-  required: true
+  - name: projects
+    backref: publications
+    label: refers_to
+    target_type: project
+    multiplicity: many_to_many
+    required: true
+  - name: studies
+    backref: publications
+    label: refers_to
+    target_type: study
+    multiplicity: many_to_many
+    required: false
+
 required:
-- submitter_id
-- type
-- projects
-uniqueKeys:
-- - id
-- - project_id
   - submitter_id
+  - type
+  - projects
+  - article_title
+  - ardac_publication_type
+  - pubmed_match_status
+
+uniqueKeys:
+  - [ id ]
+  - [ project_id, submitter_id ]
+
 properties:
   type:
-    enum:
-    - publication
+    enum: [ 'publication' ]
   id:
-    $ref: _definitions.yaml#/UUID
+    $ref: '_definitions.yaml#/UUID'
     systemAlias: node_id
   state:
-    $ref: _definitions.yaml#/state
+    $ref: '_definitions.yaml#/state'
   submitter_id:
+    term:
+      $ref: '_terms.yaml#/submitter_id'
     type:
-    - string
-    - 'null'
+      - string
+      - 'null'
   pmid:
+    term:
+      $ref: '_terms.yaml#/pmid'
+    type: string
+  pmid_version:
+    term:
+      $ref: '_terms.yaml#/pmid_version'
     type: string
   doi:
+    term:
+      $ref: '_terms.yaml#/doi'
+    type: string
+  pmcid:
+    term:
+      $ref: '_terms.yaml#/pmcid'
+    type: string
+  article_title:
+    term:
+      $ref: '_terms.yaml#/article_title'
+    type: string
+  abstract_text:
+    term:
+      $ref: '_terms.yaml#/abstract_text'
+    type: string
+  author_list:
+    term:
+      $ref: '_terms.yaml#/author_list'
+    type: string
+  collective_name:
+    term:
+      $ref: '_terms.yaml#/collective_name'
+    type: string
+  first_author:
+    term:
+      $ref: '_terms.yaml#/first_author'
+    type: string
+  last_author:
+    term:
+      $ref: '_terms.yaml#/last_author'
+    type: string
+  corresponding_author:
+    term:
+      $ref: '_terms.yaml#/corresponding_author'
+    type: string
+  corresponding_author_basis:
+    term:
+      $ref: '_terms.yaml#/corresponding_author_basis'
+    type: string
+  journal_title:
+    term:
+      $ref: '_terms.yaml#/journal_title'
+    type: string
+  medline_ta:
+    term:
+      $ref: '_terms.yaml#/medline_ta'
+    type: string
+  nlm_unique_id:
+    term:
+      $ref: '_terms.yaml#/nlm_unique_id'
+    type: string
+  issn:
+    term:
+      $ref: '_terms.yaml#/issn'
+    type: string
+  volume:
+    term:
+      $ref: '_terms.yaml#/volume'
+    type: string
+  issue:
+    term:
+      $ref: '_terms.yaml#/issue'
+    type: string
+  pagination:
+    term:
+      $ref: '_terms.yaml#/pagination'
+    type: string
+  elocation_id:
+    term:
+      $ref: '_terms.yaml#/elocation_id'
+    type: string
+  pub_date:
+    term:
+      $ref: '_terms.yaml#/pub_date'
+    type: string
+  article_date:
+    term:
+      $ref: '_terms.yaml#/article_date'
+    type: string
+  publication_year:
+    term:
+      $ref: '_terms.yaml#/publication_year'
+    type: integer
+  language:
+    term:
+      $ref: '_terms.yaml#/language'
+    type: string
+  url:
+    term:
+      $ref: '_terms.yaml#/url'
+    type: string
+  pubmed_publication_types:
+    term:
+      $ref: '_terms.yaml#/pubmed_publication_types'
+    type: string
+  publication_type_ui:
+    term:
+      $ref: '_terms.yaml#/publication_type_ui'
+    type: string
+  ardac_publication_type:
+    term:
+      $ref: '_terms.yaml#/ardac_publication_type'
+    enum:
+      - 'paper'
+      - 'abstract'
+      - 'book'
+      - 'other'
+  pubmed_publication_status:
+    term:
+      $ref: '_terms.yaml#/pubmed_publication_status'
+    enum:
+      - 'ppublish'
+      - 'epublish'
+      - 'aheadofprint'
+  citation_status:
+    term:
+      $ref: '_terms.yaml#/citation_status'
+    type: string
+  ardac_inclusion_status:
+    term:
+      $ref: '_terms.yaml#/ardac_inclusion_status'
+    enum:
+      - 'included'
+      - 'TBD'
+      - 'excluded'
+  ardac_curation_status:
+    term:
+      $ref: '_terms.yaml#/ardac_curation_status'
+    enum:
+      - 'auto_matched'
+      - 'manually_verified'
+      - 'needs_review'
+  mesh_descriptors:
+    term:
+      $ref: '_terms.yaml#/mesh_descriptors'
+    type: string
+  mesh_descriptor_ui:
+    term:
+      $ref: '_terms.yaml#/mesh_descriptor_ui'
+    type: string
+  grant_id:
+    term:
+      $ref: '_terms.yaml#/grant_id'
+    type: string
+  agency:
+    term:
+      $ref: '_terms.yaml#/agency'
+    type: string
+  acronym:
+    term:
+      $ref: '_terms.yaml#/acronym'
+    type: string
+  country:
+    term:
+      $ref: '_terms.yaml#/country'
+    type: string
+  funding_evidence:
+    term:
+      $ref: '_terms.yaml#/funding_evidence'
+    enum:
+      - 'pubmed_grantlist'
+      - 'manual_confirmation'
+      - 'not_available'
+  pubmed_match_status:
+    term:
+      $ref: '_terms.yaml#/pubmed_match_status'
+    enum:
+      - 'matched_pmid'
+      - 'matched_doi'
+      - 'matched_structured_citation'
+      - 'matched_title_search'
+      - 'matched_title_words'
+      - 'ambiguous'
+      - 'not_found'
+      - 'not_applicable'
+  pubmed_retrieval_date:
+    term:
+      $ref: '_terms.yaml#/pubmed_retrieval_date'
+    $ref: '_definitions.yaml#/datetime'
+  record_hash:
+    term:
+      $ref: '_terms.yaml#/record_hash'
+    type: string
+  ardac_alchepnet_relevance:
+    term:
+      $ref: '_terms.yaml#/ardac_alchepnet_relevance'
+    enum:
+      - 'TBD'
+  source_list:
+    term:
+      $ref: '_terms.yaml#/source_list'
+    type: string
+  source_record_id:
+    term:
+      $ref: '_terms.yaml#/source_record_id'
     type: string
   projects:
-    $ref: _definitions.yaml#/to_many_project
+    $ref: '_definitions.yaml#/to_many_project'
+  studies:
+    $ref: '_definitions.yaml#/to_many'
   project_id:
-    type: string
+    $ref: '_definitions.yaml#/project_id'
   created_datetime:
-    $ref: _definitions.yaml#/datetime
+    $ref: '_definitions.yaml#/datetime'
   updated_datetime:
-    $ref: _definitions.yaml#/datetime
+    $ref: '_definitions.yaml#/datetime'
