@@ -10821,8 +10821,8 @@
     },
     "_settings.yaml": {
         "enable_case_cache": false,
-        "_dict_commit": "ecab82af22b989c51cd3a23a8ccd7a4becb6b01d",
-        "_dict_version": "2.5.0"
+        "_dict_commit": "134032b688c94b714ee98bdc4c6ea0e74d456467",
+        "_dict_version": "2.5.1"
     },
     "_terms.yaml": {
         "id": "_terms",
