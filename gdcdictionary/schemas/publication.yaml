@@ -8,7 +8,7 @@ category: administrative
 program: '*'
 project: '*'
 description: >
-  Publication associated with a project or study. Bibliographic properties are
+  Publication associated with an ARDaC project. Bibliographic properties are
   PubMed/MEDLINE data elements; see _terms.yaml for the element name, the NLM
   DTD release that fixes it, and a citable reference. PubMed values and ARDaC
   decisions are held in separate properties.
@@ -30,12 +30,6 @@ links:
     target_type: project
     multiplicity: many_to_many
     required: true
-  - name: studies
-    backref: publications
-    label: refers_to
-    target_type: study
-    multiplicity: many_to_many
-    required: false
 
 required:
   - submitter_id
@@ -270,8 +264,6 @@ properties:
     type: string
   projects:
     $ref: '_definitions.yaml#/to_many_project'
-  studies:
-    $ref: '_definitions.yaml#/to_many'
   project_id:
     $ref: '_definitions.yaml#/project_id'
   created_datetime:
