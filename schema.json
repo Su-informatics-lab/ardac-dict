@@ -6805,7 +6805,7 @@
         "category": "administrative",
         "program": "*",
         "project": "*",
-        "description": "Publication associated with a project or study. Bibliographic properties are PubMed/MEDLINE data elements; see _terms.yaml for the element name, the NLM DTD release that fixes it, and a citable reference. PubMed values and ARDaC decisions are held in separate properties.\n",
+        "description": "Publication associated with an ARDaC project. Bibliographic properties are PubMed/MEDLINE data elements; see _terms.yaml for the element name, the NLM DTD release that fixes it, and a citable reference. PubMed values and ARDaC decisions are held in separate properties.\n",
         "additionalProperties": false,
         "submittable": true,
         "validators": null,
@@ -6824,14 +6824,6 @@
                 "target_type": "project",
                 "multiplicity": "many_to_many",
                 "required": true
-            },
-            {
-                "name": "studies",
-                "backref": "publications",
-                "label": "refers_to",
-                "target_type": "study",
-                "multiplicity": "many_to_many",
-                "required": false
             }
         ],
         "required": [
@@ -7177,9 +7169,6 @@
             },
             "projects": {
                 "$ref": "_definitions.yaml#/to_many_project"
-            },
-            "studies": {
-                "$ref": "_definitions.yaml#/to_many"
             },
             "project_id": {
                 "$ref": "_definitions.yaml#/project_id"
@@ -10832,7 +10821,7 @@
     },
     "_settings.yaml": {
         "enable_case_cache": false,
-        "_dict_commit": "453d04fe2bb0dc0f4215a335f79b29418cd86192",
+        "_dict_commit": "ecab82af22b989c51cd3a23a8ccd7a4becb6b01d",
         "_dict_version": "2.5.0"
     },
     "_terms.yaml": {
